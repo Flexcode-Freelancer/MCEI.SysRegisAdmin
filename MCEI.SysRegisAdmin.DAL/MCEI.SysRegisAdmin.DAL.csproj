@@ -15,4 +15,8 @@
     <ProjectReference Include="..\MCEI.SysRegisAdmin.EN\MCEI.SysRegisAdmin.EN.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Document\" />
+  </ItemGroup>
+
 </Project>
