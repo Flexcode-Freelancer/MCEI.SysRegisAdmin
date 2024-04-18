@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MCEI.SysRegisAdmin.BL\MCEI.SysRegisAdmin.BL.csproj" />
+    <ProjectReference Include="..\MCEI.SysRegisAdmin.EN\MCEI.SysRegisAdmin.EN.csproj" />
+  </ItemGroup>
+
 </Project>

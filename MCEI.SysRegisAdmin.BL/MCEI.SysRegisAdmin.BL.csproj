@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MCEI.SysRegisAdmin.DAL\MCEI.SysRegisAdmin.DAL.csproj" />
+    <ProjectReference Include="..\MCEI.SysRegisAdmin.EN\MCEI.SysRegisAdmin.EN.csproj" />
+  </ItemGroup>
+
 </Project>
