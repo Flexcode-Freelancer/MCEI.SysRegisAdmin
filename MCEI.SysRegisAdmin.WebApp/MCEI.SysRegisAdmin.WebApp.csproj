@@ -18,4 +18,8 @@
     <ProjectReference Include="..\MCEI.SysRegisAdmin.EN\MCEI.SysRegisAdmin.EN.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\plugins\SweetAlert2\js\" />
+  </ItemGroup>
+
 </Project>
