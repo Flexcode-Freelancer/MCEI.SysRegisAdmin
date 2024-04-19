@@ -91,3 +91,35 @@
         </div>
     </div>
 }
+
+@section Scripts{
+    <script>
+        // Verificar si hay un mensaje de éxito en TempData
+        const successMessageCreate = '@TempData["SuccessMessageCreate"]';
+        if (successMessageCreate) {
+            Swal.fire(
+                '¡Guardado Exitosamente!',
+                successMessageCreate,
+                'success'
+            );
+        }
+
+        const successMessageUpdate = '@TempData["SuccessMessageUpdate"]';
+        if (successMessageUpdate) {
+            Swal.fire(
+                '¡Modificado Exitosamente!',
+                successMessageUpdate,
+                'success'
+            );
+        }
+
+        const successMessageDelete = '@TempData["SuccessMessageDelete"]';
+        if (successMessageDelete) {
+            Swal.fire(
+                '¡Eliminado Exitosamente!',
+                successMessageDelete,
+                'success'
+            );
+        }
+    </script>
+}
