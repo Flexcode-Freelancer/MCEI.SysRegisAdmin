@@ -22,3 +22,20 @@
 <div>
     <a asp-action="Index">Regresar a La Lista</a>
 </div>
+
+@section Scripts {
+    <script>
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error'
+            });
+        }
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+    </script>
+} 
