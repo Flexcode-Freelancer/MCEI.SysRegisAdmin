@@ -17,9 +17,31 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete">
+    <form asp-action="Delete" id="Form" onsubmit="CreateRecord(event)">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Eliminar Rol"/> |
         <a asp-action="Index">Regresar a La Lista</a>
     </form>
 </div>
+
+@section Scripts {
+    <script>
+        function CreateRecord(e) {
+            e.preventDefault();
+
+            const form = document.getElementById('Form');
+            const nameInput = document.getElementById('Name');
+
+            Swal.fire({
+                title: '¿Estas Seguro De Eliminar Este Registro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Si, Eliminar Registro'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
+}
