@@ -1,0 +1,22 @@
+﻿@model MCEI.SysRegisAdmin.EN.Role___EN.Role
+
+@{
+    ViewData["Title"] = "Detalles Del Rol";
+}
+
+<h1>Detalles Del Rol</h1>
+<hr />
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Modificar Rol", "Edit", new { id = Model.Id }, new { @class = "" }) |
+    <a asp-action="Index">Regresar a La Lista</a>
+</div>
