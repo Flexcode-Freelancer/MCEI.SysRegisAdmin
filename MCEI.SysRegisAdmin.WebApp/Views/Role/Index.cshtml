@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MCEI.SysRegisAdmin.EN.Role___EN.Role>
+
+@{
+    ViewData["Title"] = "Rol";
+    int numPage = 1;
+    int numRegistros = 0;
+    int numRegistrosPorPage = 10;
+    int[] tops = { 10, 20, 50, -1 };
+    int topActual = Convert.ToInt32(ViewBag.Top);
+}
+
+<h1>Mantenimiento Para Roles</h1>
+<hr />
+<form asp-action="Index">
+    <div>
+        <label>Nombre</label>
+        <input type="text" name="Name" />
+    </div>
+    <div>
+        <label>Mostrar</label>
+        <select name="Top_Aux">
+            @foreach (var item in tops)
+            {
+                string strItem = item != -1 ? item.ToString() : "Todos";
+                if (item != topActual)
+                {
+                    <option value="@item">@strItem</option>
+                }
+                else
+                {
+                    <option selected value="@item">@strItem</option>
+                }
+            }
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Buscar" /> &nbsp;&nbsp;
+        <a asp-action="Create">Crear Nuevo Rol</a>
+    </div>
+</form>
+<h3>Tabla de Resultados</h3>
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-page="@numPage">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "" })
+                </td>
+            </tr>
+            numRegistros++;
+            if (numRegistros == numRegistrosPorPage)
+            {
+                numPage++;
+                numRegistros = 0;
+            }
+        }
+        @{
+            if (numRegistros == 0)
+            {
+                numPage--;
+            }
+        }
+    </tbody>
+</table>
+@if (numPage > 1)
+{
+    <div style="overflow:auto">
+        <div>
+            <ul data-numpage="@numPage" data-pageactive="1">
+                <li data-typepage="Previous"><a href="#">Anterior</a></li>
+                @for (var i = 1; i <= numPage; i++)
+                {
+                    <li data-page="@i" data-typepage="Item"><a href="#">@i</a></li>
+                }
+                <li data-typepage="Next"><a href="#">Siguiente</a></li>
+            </ul>
+        </div>
+    </div>
+}
