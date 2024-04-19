@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MCEI.SysRegisAdmin.WebApp.Controllers.Role___Controller
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Desarrollador")]
+    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Desarrollador")]
     public class RoleController : Controller
     {
         // Instancia De La Clase Logica De Negocio
