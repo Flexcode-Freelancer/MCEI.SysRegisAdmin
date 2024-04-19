@@ -22,8 +22,14 @@ namespace MCEI.SysRegisAdmin.DAL.Role___DAL
             int result = 0;
             using (var dbContext = new ContextBD())
             {
-                dbContext.Role.Add(role);
-                result = await dbContext.SaveChangesAsync();
+                bool rolExists = await ExistRol(role, dbContext);
+                if (rolExists == false)
+                {
+                    dbContext.Role.Add(role);
+                    result = await dbContext.SaveChangesAsync();
+                }
+                else
+                    throw new Exception("Rol Ya Existente, Vuelve a Intentarlo");
             }
             return result;
         }
@@ -39,9 +45,15 @@ namespace MCEI.SysRegisAdmin.DAL.Role___DAL
                 var roleDb = await dbContext.Role.FirstOrDefaultAsync(r => r.Id == role.Id);
                 if (roleDb != null)
                 {
-                    roleDb.Name = role.Name;
-                    dbContext.Role.Update(roleDb);
-                    result = await dbContext.SaveChangesAsync();
+                    bool rolExists = await ExistRol(role, dbContext);
+                    if (rolExists == false)
+                    {
+                        roleDb.Name = role.Name;
+                        dbContext.Role.Update(roleDb);
+                        result = await dbContext.SaveChangesAsync();
+                    }
+                    else
+                        throw new Exception("Rol Ya Existente, Vuelve a Intentarlo");
                 }
             }
             return result;
@@ -123,6 +135,18 @@ namespace MCEI.SysRegisAdmin.DAL.Role___DAL
                 roles = await select.ToListAsync();
             }
             return roles;
+        }
+        #endregion
+
+        #region METODO PARA VALIDAR UNICA EXISTENCIA DEL REGISTRO
+        // Metodo Para Validar La Unica Existencia De Un Registro y No Haber Duplicidad
+        private static async Task<bool> ExistRol(Role role, ContextBD dbContext)
+        {
+            bool result = false;
+            var roles = await dbContext.Role.FirstOrDefaultAsync(r => r.Name == role.Name && r.Id != role.Id);
+            if(roles != null && roles.Id > 0 && roles.Name == role.Name)
+                result = true;
+            return result;
         }
         #endregion
     }
