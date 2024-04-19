@@ -1,0 +1,23 @@
+﻿@model MCEI.SysRegisAdmin.EN.Role___EN.Role
+
+@{
+    ViewData["Title"] = "Modificar Rol";
+}
+
+<h1>Crear Nuevo Rol</h1>
+<hr />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <input type="submit" value="Modificar Rol" />
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Regresar a La Lista</a>
+</div>
