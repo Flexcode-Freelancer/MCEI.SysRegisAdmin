@@ -5,43 +5,31 @@
 }
 
 <h1>Eliminar Rol Existente</h1>
-<h3>¿Estas Seguro De Eliminar Este Registro? No Podras Revertir Esta Accion</h3>
 <hr />
-<div>
-    <dl>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
 
-    <form asp-action="Delete" id="Form" onsubmit="CreateRecord(event)">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar Rol"/> |
-        <a asp-action="Index">Regresar a La Lista</a>
-    </form>
-</div>
+<script>
+    async function ShowCreatePrompt() {
+        const result = await Swal.fire({
+            title: `Eliminar Rol: ${'@Model.Name'}`,
+            text: '¿Estás seguro de eliminar este registro? No podrás revertir esta acción.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        });
 
-@section Scripts {
-    <script>
-        function CreateRecord(e) {
-            e.preventDefault();
-
-            const form = document.getElementById('Form');
-            const nameInput = document.getElementById('Name');
-
-            Swal.fire({
-                title: '¿Estas Seguro De Eliminar Este Registro?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Si, Eliminar Registro'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
+        // Si el usuario confirma la eliminación
+        if (result.isConfirmed) {
+            document.getElementById('Id').value = '@Model.Id'; // Establece el valor del campo oculto 'Id'
+            document.getElementById('Form').submit(); // Envía el formulario
+        } else {
+            window.location.href = '@Url.Action("Index", "Role")'; // Si el usuario cancela, redirige a la acción "Index"
         }
-    </script>
-}
+    }
+    window.onload = ShowCreatePrompt; // Asigna la función ShowCreatePrompt al evento de carga de la página
+</script>
+
+<form asp-action="Delete" id="Form">
+    <input type="hidden" asp-for="Id" />
+</form>
