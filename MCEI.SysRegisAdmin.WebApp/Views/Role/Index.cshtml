@@ -94,32 +94,35 @@
 
 @section Scripts{
     <script>
-        // Verificar si hay un mensaje de éxito en TempData
-        const successMessageCreate = '@TempData["SuccessMessageCreate"]';
-        if (successMessageCreate) {
-            Swal.fire(
-                '¡Guardado Exitosamente!',
-                successMessageCreate,
-                'success'
-            );
-        }
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 8000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
 
-        const successMessageUpdate = '@TempData["SuccessMessageUpdate"]';
-        if (successMessageUpdate) {
-            Swal.fire(
-                '¡Modificado Exitosamente!',
-                successMessageUpdate,
-                'success'
-            );
-        }
+        // Check for success messages and display toasts
+        const successMessages = {
+            Creado: '@TempData["SuccessMessageCreate"]',
+            Modificado: '@TempData["SuccessMessageUpdate"]',
+            Eliminado: '@TempData["SuccessMessageDelete"]'
+        };
 
-        const successMessageDelete = '@TempData["SuccessMessageDelete"]';
-        if (successMessageDelete) {
-            Swal.fire(
-                '¡Eliminado Exitosamente!',
-                successMessageDelete,
-                'success'
-            );
+        for (const messageType in successMessages) {
+            const message = successMessages[messageType];
+            if (message) {
+                Toast.fire({
+                    icon: "success",
+                    title: `¡${messageType} Exitosamente!`,
+                    text: message
+                });
+            }
         }
     </script>
+
 }
