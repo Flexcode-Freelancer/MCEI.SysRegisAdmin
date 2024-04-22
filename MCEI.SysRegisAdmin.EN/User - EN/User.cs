@@ -68,4 +68,9 @@ namespace MCEI.SysRegisAdmin.EN.User___EN
 
         public Role? Role { get; set; } //propiedad de navegación
     }
+
+    public enum User_Status
+    {
+        ACTIVO = 1, INACTIVO = 2
+    }
 }
