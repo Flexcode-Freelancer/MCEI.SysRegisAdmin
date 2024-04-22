@@ -8,7 +8,7 @@
     int numRegistrosPorPage = 10;
     int[] tops = { 10, 20, 50,-1 };
     int topActual = Convert.ToInt32(ViewBag.Top);
-    List<Role> roles = ViewBag.Roles as List<Role> ?? new List<Role>();
+    List<Role> roles = ViewBag.Roles as List<Role>;
 }
 
 <h1>Mantenimiento Para Usuarios</h1>
