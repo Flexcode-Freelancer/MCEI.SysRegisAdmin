@@ -21,5 +21,5 @@ GO
 INSERT INTO [Role] VALUES('Desarrollador');
 GO
 INSERT INTO [User] (IdRole, [Name], LastName, Email, [Password], [Status], RegistrationDate) 
-VALUES (1, 'Flexcode', 'Freelancer', 'DesAdmin@ElimIzalco.com', 'c8aa131427a72781b156ac723ddb917f', 1, SYSDATETIME());
+VALUES (1, 'Flexcode', 'Freelancer', 'DesAdmin@elimizalco.com', 'c8aa131427a72781b156ac723ddb917f', 1, SYSDATETIME());
 GO
