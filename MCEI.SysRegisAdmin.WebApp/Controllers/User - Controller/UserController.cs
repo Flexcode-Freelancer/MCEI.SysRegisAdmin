@@ -63,6 +63,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
             try
             {
                 int result = await userBL.CreateAsync(user);
+                TempData["SuccessMessageCreate"] = "Usuario Agregado Exitosamente";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -94,6 +95,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
             try
             {
                 int result = await userBL.UpdateAsync(user);
+                TempData["SuccessMessageUpdate"] = "Usuario Modificado Exitosamente";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -125,6 +127,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
             try
             {
                 int result = await userBL.DeleteAsync(user);
+                TempData["SuccessMessageDelete"] = "Usuario Eliminado Exitosamente";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
