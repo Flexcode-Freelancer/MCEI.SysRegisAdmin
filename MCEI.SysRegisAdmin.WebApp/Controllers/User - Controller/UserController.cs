@@ -137,7 +137,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
                 if (userDb == null)
                     userDb = new User();
                 if (userDb.Id > 0)
-                    userDb.Role = await roleBL.GetByIdAsync(new Role { Id = userDb.Id });
+                    userDb.Role = await roleBL.GetByIdAsync(new Role { Id = userDb.IdRole });
                 return View(userDb);
             }
         }
