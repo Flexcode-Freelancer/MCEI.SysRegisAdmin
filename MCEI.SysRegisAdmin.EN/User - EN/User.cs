@@ -36,7 +36,7 @@ namespace MCEI.SysRegisAdmin.EN.User___EN
         public string LastName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El Correo Electronico es requerido")]
-        [MaxLength(30, ErrorMessage = "Máximo 30 caracteres")]
+        [MaxLength(50, ErrorMessage = "Máximo 30 caracteres")]
         [Display(Name = "Correo Electronico")]
         public string Email { get; set; } = string.Empty;
 
