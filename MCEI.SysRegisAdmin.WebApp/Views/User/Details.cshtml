@@ -1,0 +1,84 @@
+﻿@model MCEI.SysRegisAdmin.EN.User___EN.User
+
+@{
+    ViewData["Title"] = "Detalles Del Usuario";
+}
+
+<h1>Detalles Del Usuario</h1>
+<span>@ViewBag.Error</span>
+<hr />
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdRole)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role!.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        @if (Model.Status == 1)
+        {
+            <dd>
+                Activo
+            </dd>
+        }
+        else if (Model.Status == 2)
+        {
+            <dd>
+                Inactivo
+            </dd>
+        }
+        else
+        {
+            <dd> </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new { @class = "" })
+    <a asp-action="Index">Regresar A La Lista</a>
+</div>
+
+@section Scripts{
+    <script>
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error'
+            });
+        }
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+    </script>
+}
