@@ -9,6 +9,28 @@
     <link href="~/plugins/SweetAlert2/css/min.css" rel="stylesheet" />
 </head>
 <body>
+    <nav>
+        <ul>
+            @if (User.Identity!.IsAuthenticated && User.IsInRole("Desarrollador"))
+            {
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="User" asp-action="ChangePassword">Cambiar Contraseña</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="User" asp-action="Logout">Cerrar Sesion</a>
+                </li>
+            }
+        </ul>
+    </nav>
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -16,6 +38,35 @@
         </main>
     </div>
 
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 8000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        // Comprobar si hay mensajes de éxito y mostrar notificaciones del sistema
+        const successMessages = {
+            Inicio De Sesion: '@TempData["SuccessMessageLogin"]',
+        };
+
+        for (const messageType in successMessages) {
+            const message = successMessages[messageType];
+            if (message) {
+                Toast.fire({
+                    icon: "success",
+                    title: `¡${messageType} Exitosamente!`,
+                    text: message
+                });
+            }
+        }
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/plugins/SweetAlert2/js/min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
