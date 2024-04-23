@@ -1,0 +1,42 @@
+﻿@model MCEI.SysRegisAdmin.EN.User___EN.User
+
+@{
+    ViewData["Title"] = "Inicio de sesión";
+}
+
+<h1>Inicio de Sesión</h1>
+<hr />
+<form asp-action="Login">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" required/>
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" required/>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <input type="submit" value="Iniciar sesión"/>
+    </div>
+    <span class="text-danger">@ViewBag.Error</span>
+</form>
+
+@section Scripts{
+    <script>
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Ups!',
+                text: message,
+                icon: 'error'
+            });
+        }
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+    </script>
+}
