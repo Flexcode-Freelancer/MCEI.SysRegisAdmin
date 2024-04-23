@@ -15,7 +15,7 @@ using System.Security.Claims;
 
 namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 {
-    // [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Desarrollador")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Desarrollador")]
     public class UserController : Controller
     {
         // Instancias Para Acceder a Los Metodos
@@ -24,7 +24,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 
         #region METODO PARA INDEX
         // Metodo Para Mostrar La Vista Index
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Index(User user = null!)
         {
             if (user == null)
@@ -46,7 +46,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 
         #region METODO PARA GUARDAR
         // Accion Que Muestra El Formulario
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Create()
         {
             var roles = await roleBL.GetAllAsync();
@@ -55,7 +55,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
         }
 
         // Accion Que Recibe Los Datos y Los Envia a La Base De Datos
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(User user)
@@ -77,7 +77,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 
         #region METODO PARA MODIFICAR
         // Accion Que Muestra El Formulario
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Edit(int id)
         {
             var user = await userBL.GetByIdAsync(new User { Id = id });
@@ -87,7 +87,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
         }
 
         // Accion Que Recibe Los Datos y Los Envia a La Base De Datos
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, User user)
@@ -109,7 +109,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 
         #region METODO PARA ELIMINAR
         // Accion Que Muestra El Formulario
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Delete(int id)
         {
             var user = await userBL.GetByIdAsync(new User { Id = id });
@@ -119,7 +119,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
         }
 
         // Accion Que Recibe Los Datos y Los Envia a La Base De Datos
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, User user)
@@ -145,7 +145,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 
         #region METODO PARA DETALLES
         // Accion Que Muestra El Formulario
-        // [Authorize(Roles = "Desarrollador")]
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Details(int id)
         {
             var user = await userBL.GetByIdAsync(new User { Id = id });
@@ -156,7 +156,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
 
         #region METODO DE INICIO DE SESION Y CERRAR SESION (LOGIN, LOGOUT)
         // Accion Que Muestra El Formulario
-        // [AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null!)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -166,7 +166,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
         }
 
         // Accion Que Ejecuta La Autenticacion Del Usuario
-        // [AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(User user, string returnUrl = null!)
@@ -187,7 +187,8 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
                 if (!string.IsNullOrWhiteSpace(returnUrl))
                     return Redirect(returnUrl);
                 else
-                    return RedirectToAction("Index", "Home");
+                    TempData["SuccessMessageLogin"] = "Inicio De Sesion Existoso!";
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception e)
             {
@@ -198,7 +199,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
         }
 
         // Accion Que Permite Cerrar La Sesion
-        // [AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> Logout(string returnUrl = null!)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
