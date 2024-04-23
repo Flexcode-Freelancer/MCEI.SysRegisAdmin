@@ -14,21 +14,25 @@
     <input type="hidden" asp-for="Id" />
     <div>
         <label asp-for="Name"></label>
+        <span>*</span>
         <input asp-for="Name" />
         <span asp-validation-for="Name"></span>
     </div>
     <div>
         <label asp-for="LastName"></label>
+        <span>*</span>
         <input asp-for="LastName" />
         <span asp-validation-for="LastName"></span>
     </div>
     <div>
         <label asp-for="Email"></label>
+        <span>*</span>
         <input asp-for="Email"/>
         <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="IdRole"></label>
+        <span>*</span>
         <select asp-for="IdRole">
             @foreach (var item in roles!)
             {
@@ -46,6 +50,7 @@
     </div>
     <div>
         <label asp-for="Status"></label>
+        <span>*</span>
         <select asp-for="Status">
             @if (Model.Status == 1)
             {
