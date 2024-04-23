@@ -106,7 +106,7 @@
 
         // Función para validar los campos Name y LastName antes de enviar el formulario
         function validateNameOrLastName(input) {
-            const regex = /^[A-ZÑa-zñ . ]+$/;
+            const regex = /^[A-ZÑa-zñáéíóúÁÉÍÓÚ. ]+$/;
 
             if (!regex.test(input.value.trim())) {
                 // Si el valor no cumple con la expresión regular, mostrar alerta de error
