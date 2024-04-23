@@ -13,19 +13,19 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
         <label asp-for="Name"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <input asp-for="Name" placeholder="Ingresar" />
         <span asp-validation-for="Name"></span>
     </div>
     <div>
         <label asp-for="LastName"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <input asp-for="LastName" placeholder="Ingresar" />
         <span asp-validation-for="LastName"></span>
     </div>
     <div>
         <label asp-for="Status"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <select asp-for="Status">
             <option value="">Seleccionar</option>
             <option selected value="1">Activo</option>
@@ -35,25 +35,25 @@
     </div>
     <div>
         <label asp-for="Email"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <input asp-for="Email" placeholder="Ingresar"/>
         <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="Password"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <input asp-for="Password" placeholder="XXXXXXXX" />
         <span asp-validation-for="Password"></span>
     </div>
     <div>
         <label asp-for="ConfirmPassword_Aux"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <input asp-for="ConfirmPassword_Aux" placeholder="XXXXXXXX" />
         <span asp-validation-for="ConfirmPassword_Aux"></span>
     </div>
     <div>
         <label asp-for="IdRole"></label>
-        <span class="text-danger">*</span>
+        <span>*</span>
         <select asp-for="IdRole">
             @foreach (var item in roles!)
             {
