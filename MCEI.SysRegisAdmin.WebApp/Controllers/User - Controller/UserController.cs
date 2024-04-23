@@ -113,7 +113,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
         public async Task<IActionResult> Delete(int id)
         {
             var user = await userBL.GetByIdAsync(new User { Id = id });
-            user.Role = await roleBL.GetByIdAsync(new Role { Id = user.Id });
+            user.Role = await roleBL.GetByIdAsync(new Role { Id = user.IdRole });
 
             return View(user);
         }
