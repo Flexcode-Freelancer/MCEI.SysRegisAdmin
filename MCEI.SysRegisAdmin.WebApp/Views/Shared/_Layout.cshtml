@@ -54,35 +54,6 @@
         </main>
     </div>
 
-    <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 8000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-        });
-
-        // Comprobar si hay mensajes de éxito y mostrar notificaciones del sistema
-        const successMessages = {
-            Inicio De Sesion: '@TempData["SuccessMessageLogin"]',
-        };
-
-        for (const messageType in successMessages) {
-            const message = successMessages[messageType];
-            if (message) {
-                Toast.fire({
-                    icon: "success",
-                    title: `¡${messageType} Exitosamente!`,
-                    text: message
-                });
-            }
-        }
-    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/plugins/SweetAlert2/js/min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
