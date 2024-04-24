@@ -187,8 +187,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
                 if (!string.IsNullOrWhiteSpace(returnUrl))
                     return Redirect(returnUrl);
                 else
-                    TempData["SuccessMessageLogin"] = "Inicio De Sesion Existoso!";
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
             }
             catch (Exception e)
             {
