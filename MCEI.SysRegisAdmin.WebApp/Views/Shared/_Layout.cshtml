@@ -10,26 +10,42 @@
 </head>
 <body>
     <nav>
-        <ul>
-            @if (User.Identity!.IsAuthenticated && User.IsInRole("Desarrollador"))
-            {
+        @if (User.Identity!.IsAuthenticated && User.IsInRole("Desarrollador"))
+        {
+            <ul>
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <span>Principal</span>
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                    <span>Administracion</span>
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="#" asp-action="#">Membresia</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
+                    <span>Seguridad</span>
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="User" asp-action="ChangePassword">Cambiar Contraseña</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a asp-area="" asp-controller="User" asp-action="ChangePassword">Cambiar Contraseña</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="User" asp-action="Logout">Cerrar Sesion</a>
-                </li>
-            }
-        </ul>
+            </ul>
+            <a asp-area="" asp-controller="User" asp-action="Logout">Cerrar Sesión</a>
+        }
     </nav>
 
     <div class="container">
