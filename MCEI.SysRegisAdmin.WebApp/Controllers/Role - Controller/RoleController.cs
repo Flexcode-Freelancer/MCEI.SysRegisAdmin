@@ -26,14 +26,8 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.Role___Controller
         {
             if (role == null)
                 role = new Role();
-            if (role.Top_Aux == 0)
-                role.Top_Aux = 10; // setear el número de registros a mostrar
-            else if (role.Top_Aux == -1)
-                role.Top_Aux = 0;
 
             var roles = await roleBL.SearchAsync(role);
-            ViewBag.Top = role.Top_Aux;
-
             return View(roles);
         }
         #endregion
