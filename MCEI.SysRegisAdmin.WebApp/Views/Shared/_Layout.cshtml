@@ -11,51 +11,68 @@
     <link href="~/plugins/DataTables/css/dataTable.css" rel="stylesheet" />
 </head>
 <body>
-    <nav>
-        @if (User.Identity!.IsAuthenticated && User.IsInRole("Desarrollador"))
-        {
-            <ul>
-                <li>
-                    <span>Principal</span>
-                    <ul>
-                        <li>
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <span>Administracion</span>
-                    <ul>
-                        <li>
-                            <a asp-area="" asp-controller="#" asp-action="#">Membresia</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <span>Seguridad</span>
-                    <ul>
-                        <li>
-                            <a asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="User" asp-action="ChangePassword">Cambiar Contraseña</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <a asp-area="" asp-controller="User" asp-action="Logout">Cerrar Sesión</a>
-        }
-    </nav>
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
+    @if(User.Identity.IsAuthenticated)
+    {
+        <nav>
+            @if (User.Identity!.IsAuthenticated && User.IsInRole("Desarrollador"))
+            {
+                <ul>
+                    <li>
+                        <span>Principal</span>
+                        <ul>
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>Administracion</span>
+                        <ul>
+                            <li>
+                                <a asp-area="" asp-controller="#" asp-action="#">Membresia</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>Mantenimiento</span>
+                        <ul>
+                            <li>
+                                <a asp-area="" asp-controller="ProfessionOrStudy" asp-action="Index">Profesion u Oficio</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>Seguridad</span>
+                        <ul>
+                            <li>
+                                <a asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="User" asp-action="ChangePassword">Cambiar Contraseña</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <a asp-area="" asp-controller="User" asp-action="Logout">Cerrar Sesión</a>
+            }
+        </nav>
+        <div>
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    }
+    else
+    {
+        <div>
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/plugins/SweetAlert2/js/min.js"></script>
     <script src="~/plugins/DataTables/js/min.js"></script>
