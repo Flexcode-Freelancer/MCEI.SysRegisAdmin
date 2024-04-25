@@ -3,11 +3,6 @@
 
 @{
     ViewData["Title"] = "Usuarios";
-    int numPage = 1;
-    int numRegistros = 0;
-    int numRegistrosPorPage = 10;
-    int[] tops = { 10, 20, 50,-1 };
-    int topActual = Convert.ToInt32(ViewBag.Top);
     List<Role> roles = ViewBag.Roles as List<Role>;
 }
 
@@ -49,28 +44,12 @@
         </select>
     </div>
     <div>
-        <label>Top</label>
-        <select name="top_aux">
-            @foreach (var item in tops)
-            {
-                string strItem = item != -1 ? item.ToString() : "Todos";
-                if (item != topActual)
-                {
-                    <option value="@item">@strItem</option>
-                }
-                else
-                {
-                    <option selected value="@item">@strItem</option>
-                }
-            }
-        </select>
-    </div>
-    <div>
-        <input type="submit" value="Buscar Usuario"/>
+        <input type="submit" value="Buscar Usuario"/> |
         <a asp-action="Create">Crear Nuevo Usuario</a>
     </div>
 </form>
-<table>
+<h2>Tabla de Resultados</h2>
+<table id="ResultData" class="hover" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -97,7 +76,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr data-page="@numPage">
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -126,42 +105,33 @@
                     @Html.DisplayFor(modelItem => item.RegistrationDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" })
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" })
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" }) |
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "" })
                 </td>
             </tr>
-            numRegistros++;
-            if (numRegistros == numRegistrosPorPage)
-            {
-                numPage++;
-                numRegistros = 0;
-            }
-        }
-        @{
-            if (numRegistros == 0)
-            {
-                numPage--;
-            }
         }
     </tbody>
 </table>
-@if (numPage > 1)
-{
-    <div>
-        <ul data-numpage="@numPage" data-pageactive="1">
-            <li data-typepage="Previous"><a href="#">Anterior</a></li>
-            @for (var i = 1; i <= numPage; i++)
-            {
-                <li data-page="@i" data-typepage="Item"><a href="#">@i</a></li>
-            }
-            <li data-typepage="Next"><a href="#">Siguiente</a></li>
-        </ul>
-    </div>
-}
 
 @section Scripts {
     <script>
+
+        new DataTable('#ResultData', {
+            info: false,
+            order: false,
+            Response: true,
+            pagingType: 'simple_numbers',
+            language: {
+                search: 'Busqueda Rapida :',
+                searchPlaceholder: 'Ingresar',
+                lengthMenu: '_MENU_ Mostrar',
+                emptyTable: 'No Hay Datos Que Coincidan Con Su Criterio De Búsqueda.',
+                zeroRecords: 'No Existen Registros Segun La Busqueda',
+                processing: 'Procesando...',
+            }
+        });
+
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
