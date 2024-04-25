@@ -116,9 +116,6 @@ namespace MCEI.SysRegisAdmin.DAL.Role___DAL
 
             query = query.OrderByDescending(r => r.Id);
 
-            if (role.Top_Aux > 0)
-                query = query.Take(role.Top_Aux).AsQueryable();
-
             return query;
         }
         #endregion
