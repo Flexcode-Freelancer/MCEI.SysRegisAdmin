@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 // References Necesarias Para El Correcto Funcionamiento
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using MCEI.SysRegisAdmin.EN.User___EN;
 
 
@@ -28,8 +27,6 @@ namespace MCEI.SysRegisAdmin.EN.Role___EN
         public string Name { get; set; } = string.Empty;
         #endregion
 
-        [NotMapped]
-        public int Top_Aux { get; set; } // propiedad auxiliar
         public List<User>? Users { get; set; } // propiedad de navegación
     }
 }
