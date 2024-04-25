@@ -1,0 +1,30 @@
+﻿@model MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN.ProfessionOrStudy
+
+@{
+    ViewData["Title"] = "Detalles De La Profesion U Oficio";
+}
+
+<h1>Detalles De La Profesion u Oficio</h1>
+<hr />
+
+<script>
+    async function ShowDetailsPrompt() {
+        const result = await Swal.fire({
+            title: `Detalles De La Profesion u Oficio`,
+            text: `Nombre: ${'@Model.Name'}`,
+            showCloseButton: true,
+            showCancelButton: true,
+            cancelButtonText: 'Regresar',
+            confirmButtonText: 'Modificar',
+            reverseButtons: true
+        });
+
+        // Si el usuario elige modificar, redirige a la acción Edit
+        if (result.isConfirmed) {
+            window.location.href = '@Url.Action("Edit", "ProfessionOrStudy", new { id = Model.Id })';
+        } else {
+            window.location.href = '@Url.Action("Index", "ProfessionOrStudy")';
+        }
+    }
+    window.onload = ShowDetailsPrompt; // Asigna la función ShowDetailsPrompt al evento de carga de la página
+</script>
