@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MCEI.SysRegisAdmin.EN.User___EN;
 using MCEI.SysRegisAdmin.EN.Role___EN;
+using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN;
 
 
 #endregion
@@ -20,6 +21,7 @@ namespace MCEI.SysRegisAdmin.DAL
         //Coleccion que hace referencia a la tabla de la base de datos
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<ProfessionOrStudy> ProfessionOrStudys { get; set; }
         #endregion
 
         // Metodo de Conexion a la Base de Datos
