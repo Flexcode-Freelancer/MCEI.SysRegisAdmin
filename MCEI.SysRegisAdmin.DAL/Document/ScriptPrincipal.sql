@@ -28,3 +28,37 @@ CREATE TABLE ProfessionOrStudys(
     [Name] VARCHAR (100) NOT NULL,
 );
 GO
+CREATE TABLE Memberships (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    [Name] VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Dui VARCHAR(10) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Age VARCHAR(3) NOT NULL,
+    Gender VARCHAR(20) NOT NULL,
+    CivilStatus VARCHAR(20) NOT NULL,
+    Phone VARCHAR(9) NOT NULL,
+    [Address] VARCHAR(100) NOT NULL,
+    IdProfessionOrStudy INT NOT NULL,
+    PlaceOfWorkOrStudy VARCHAR(100) NOT NULL,
+    WorkOrStudyPhone VARCHAR(9) NOT NULL,
+    ConversionDate DATE NOT NULL,
+    PlaceOfConversion VARCHAR(100) NOT NULL,
+    WaterBaptism VARCHAR(25) NOT NULL,
+    BaptismOfTheHolySpirit VARCHAR(2) NOT NULL,
+    PastorsName VARCHAR(100) NOT NULL,
+    SupervisorsName VARCHAR(100) NOT NULL,
+    LeadersName VARCHAR(100) NOT NULL,
+    TimeToGather VARCHAR(50) NOT NULL,
+    [Zone] VARCHAR(1) NOT NULL,
+    District VARCHAR(1) NOT NULL,
+    Sector VARCHAR(1) NOT NULL,
+    Cell VARCHAR(1) NOT NULL,
+    [Status] TINYINT NOT NULL,
+    CommentsOrObservations VARCHAR(100) NOT NULL,
+    DateCreated DATETIME NOT NULL,
+    DateModification DATETIME NOT NULL,
+    ImageData VARBINARY(MAX) NOT NULL,
+    CONSTRAINT FK_Memberships_ProfessionOrStudys FOREIGN KEY (IdProfessionOrStudy) REFERENCES ProfessionOrStudys(Id)
+);
+GO
