@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using MCEI.SysRegisAdmin.EN.User___EN;
 using MCEI.SysRegisAdmin.EN.Role___EN;
 using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN;
+using MCEI.SysRegisAdmin.EN.Membership___EN;
 
 
 #endregion
@@ -22,6 +23,7 @@ namespace MCEI.SysRegisAdmin.DAL
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<ProfessionOrStudy> ProfessionOrStudys { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
         #endregion
 
         // Metodo de Conexion a la Base de Datos
