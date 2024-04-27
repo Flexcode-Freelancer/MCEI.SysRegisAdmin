@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 // Referencias Necesarias Para El Correcto Funcionamiento
 using System.ComponentModel.DataAnnotations;
+using MCEI.SysRegisAdmin.EN.Membership___EN;
 
 
 #endregion
@@ -25,6 +26,6 @@ namespace MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN
         public string Name { get; set; } = string.Empty;
         #endregion
 
-        // public List<Membership> Memberships { get; set; } = new List<Membership>(); //Propiedad de navegacion
+        public List<Membership> Memberships { get; set; } = new List<Membership>(); //Propiedad de navegacion
     }
 }
