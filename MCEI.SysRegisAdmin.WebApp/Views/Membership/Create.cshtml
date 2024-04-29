@@ -1,0 +1,223 @@
+﻿@using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN
+@model MCEI.SysRegisAdmin.EN.Membership___EN.Membership
+
+@{
+    ViewData["Title"] = "Crear Membresia";
+    List<ProfessionOrStudy> professionOrStudies = ViewBag.ProfessionOrStudies as List<ProfessionOrStudy>;
+}
+<h1>Crear Nueva Membresia</h1>
+<span>@ViewBag.Error</span>
+<hr />
+<form id="Form" asp-action="Create" onsubmit="CreateRecord(event)" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    
+    <h3>Informmacion Personal</h3>
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" placeholder="Ingresar"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" placeholder="Ingresar" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Dui"></label>
+        <input asp-for="Dui" id="inputDui" placeholder="XXXXXXXX-X"/>
+        <span asp-validation-for="Dui"></span>
+    </div>
+    <div>
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth"/>
+        <span asp-validation-for="DateOfBirth"></span>
+    </div>
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" readonly/>
+        <span asp-validation-for="Age"></span>
+    </div>
+    <div>
+        <label asp-for="Gender"></label>
+        <select name="Gender">
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+        </select>
+        <span asp-validation-for="Gender"></span>
+    </div>
+    <div>
+        <label asp-for="CivilStatus"></label>
+        <select name="CivilStatus">
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="Soltero/a">Soltero/a</option>
+            <option value="Casado/a">Casado/a</option>
+            <option value="Divorciado/a">Divorciado/a</option>
+            <option value="Viudo/a">Viudo/a</option>
+        </select>
+        <span asp-validation-for="CivilStatus"></span>
+    </div>
+    <div>
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" id="inputPhone" placeholder="0000-0000"/>
+        <span asp-validation-for="Phone"></span>
+    </div>
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address" placeholder="Ingresar" />
+        <span asp-validation-for="Address"></span>
+    </div>
+    <div>
+        <label asp-for="IdProfessionOrStudy"></label>
+        <select id="IdProfessionOrStudy" name="IdProfessionOrStudy">
+            @foreach (var profesionOrStudy in professionOrStudies!)
+            {
+                <option value="@profesionOrStudy.Id">@profesionOrStudy.Name</option>
+            }
+        </select>
+        <span asp-validation-for="IdProfessionOrStudy"></span>
+    </div>
+    <div>
+        <label asp-for="PlaceOfWorkOrStudy"></label>
+        <input asp-for="PlaceOfWorkOrStudy" class="form-control" style="width:350px" placeholder="Ingresar" />
+        <span asp-validation-for="PlaceOfWorkOrStudy" class="text-danger"></span>
+    </div>
+    <div class="mb-3" style="margin-left:inherit">
+        <label asp-for="WorkOrStudyPhone" class="control-label"></label>
+        <input asp-for="WorkOrStudyPhone" class="form-control" id="inputPhoneEmergency" placeholder="0000-0000"/>
+        <span asp-validation-for="WorkOrStudyPhone" class="text-danger"></span>
+    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h5 class="card-header">Informacion Adicional</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <div style="display:flex; margin-left:5px">
+                        <div class="mb-3">
+                            <label asp-for="ConversionDate" class="control-label"></label>
+                            <input asp-for="ConversionDate" class="form-control" />
+                            <span asp-validation-for="ConversionDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="PlaceOfConversion" class="control-label"></label>
+                            <input asp-for="PlaceOfConversion" class="form-control" style="width:350px" placeholder="Ingresar" />
+                            <span asp-validation-for="PlaceOfConversion" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="WaterBaptism" class="control-label">Buatizmo en Agua</label>
+                            <select class="form-select" name="WaterBaptism">
+                                <option value="SELECCIONAR">Seleccionar</option>
+                                <option value="Si, Dentro de la Mision">Si, Dentro de la Mision</option>
+                                <option value="Si, Fuera de la Mision">Si, Fuera de la Mision</option>
+                            </select>
+                            <span asp-validation-for="WaterBaptism" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="BaptismOfTheHolySpirit" class="control-label">Bautizmo Por El Espiritu Santo</label>
+                            <select class="form-select" name="BaptismOfTheHolySpirit">
+                                <option value="Seleccionar">Seleccionar</option>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
+                            <span asp-validation-for="BaptismOfTheHolySpirit" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div style="display:flex; margin-left:7px">
+                        <div class="mb-3">
+                            <label asp-for="PastorsName" class="control-label">Nombre del Pastor</label>
+                            <input asp-for="PastorsName" class="form-control" style="width:300px" placeholder="Ingresar" />
+                            <span asp-validation-for="PastorsName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="SupervisorsName" class="control-label">Nombre del Supervisor</label>
+                            <input asp-for="SupervisorsName" class="form-control" style="width:300px" placeholder="Ingresar" />
+                            <span asp-validation-for="SupervisorsName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="LeadersName" class="control-label">Nombre del Lider</label>
+                            <input asp-for="LeadersName" class="form-control" style="width:300px" placeholder="Ingresar"/>
+                            <span asp-validation-for="LeadersName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div style="display:flex; margin-left:7px">
+                        <div class="mb-3">
+                            <label asp-for="TimeToGather" class="control-label"></label>
+                            <input asp-for="TimeToGather" class="form-control" placeholder="Ingresar" />
+                            <span asp-validation-for="TimeToGather" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="Zone" class="control-label"></label>
+                            <select class="form-select" name="Zone">
+                                <option value="1">Zona 1</option>
+                                <option value="2">Zona 2</option>
+                                <option value="3">Zona 3</option>
+                            </select>
+                            <span asp-validation-for="Zone" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="District" class="control-label"></label>
+                            <select class="form-select" name="District">
+                                <option value="1">Distrito 1</option>
+                                <option value="2">Distrito 2</option>
+                            </select>
+                            <span asp-validation-for="District" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="Sector" class="control-label"></label>
+                            <select class="form-select" name="Sector">
+                                <option value="1">Sector 1</option>
+                                <option value="2">Sector 2</option>
+                                <option value="3">Sector 3</option>
+                            </select>
+                            <span asp-validation-for="Sector" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="Cell" class="control-label"></label>
+                            <select class="form-select" name="Cell">
+                                <option value="1">Celula 1</option>
+                                <option value="2">Celula 2</option>
+                                <option value="3">Celula 3</option>
+                                <option value="4">Celula 4</option>
+                                <option value="5">Celula 5</option>
+                            </select>
+                            <span asp-validation-for="Cell" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label asp-for="Status" class="control-label"></label>
+                            <select class="form-select" name="Status">
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div style="display:flex; margin-left:7px">
+                        <div class="mb-3">
+                            <label asp-for="CommentsOrObservations" class="control-label"></label>
+                            <input asp-for="CommentsOrObservations" class="form-control" style="width:700px" placeholder="Ingresar" />
+                            <span asp-validation-for="CommentsOrObservations" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div style="display:flex; margin-left:20px">
+                        <div class="mb-3" style="margin-left:inherit">
+                            <svg id="barcode"></svg>
+                        </div>
+                        <div class="mb-3" style="margin-left:inherit">
+                            <label for="imagen" class="control-label">Seleccionar imagen:</label>
+                            <input type="file" id="imagen" name="imagen" class="form-control" onchange="mostrarImagen()" asp-for="ImageData" />
+                        </div>
+                        <div>
+                            <img id="imagenPreview" src="#" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Crear Membresia" class="btn btn-primary" style="margin-right:1%; width:200px" />
+        <a asp-action="Index">Regresar a la Lista</a>
+    </div>
+</form>
