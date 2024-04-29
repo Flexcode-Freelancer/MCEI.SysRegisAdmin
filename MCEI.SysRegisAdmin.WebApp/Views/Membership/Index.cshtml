@@ -6,9 +6,8 @@
     List<ProfessionOrStudy> professionOrStudies = ViewBag.ProfessionOrStudies as List<ProfessionOrStudy>;
 }
 
-<h1>Mentenimiento Para Membresia</h1>
+<h1>Mantenimiento Para Membresia</h1>
 <hr />
-
 <form asp-action="Index">
     <div>
         <label>Nombre</label>
@@ -116,6 +115,27 @@
         $(document).ready(function () {
             $('#IdProfessionOrStudy').select2();
         });
+
+        document.getElementById('inputDui').addEventListener('input', function (event) {
+            var inputValue = event.target.value;
+            var formattedValue = formatDui(inputValue);
+            event.target.value = formattedValue;
+        });
+
+        function formatDui(inputValue) {
+            inputValue = inputValue.replace(/\D/g, ''); // Remover todos los caracteres que no sean dígitos
+            var formattedValue = '';
+            for (var i = 0; i < inputValue.length; i++) {
+                if (i == 8) {
+                    formattedValue += '-' + inputValue.charAt(i);
+                } else {
+                    formattedValue += inputValue.charAt(i);
+                }
+            }
+            // Limitar la longitud total a 10 caracteres, incluyendo el guion
+            formattedValue = formattedValue.substring(0, 10);
+            return formattedValue;
+        }
 
         new DataTable('#ResultData', {
             info: false,
