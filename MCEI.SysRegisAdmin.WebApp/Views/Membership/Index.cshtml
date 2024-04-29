@@ -1,0 +1,160 @@
+﻿@using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN
+@model IEnumerable<MCEI.SysRegisAdmin.EN.Membership___EN.Membership>
+
+@{
+    ViewData["Title"] = "Membresia";
+    List<ProfessionOrStudy> professionOrStudies = ViewBag.ProfessionOrStudies as List<ProfessionOrStudy>;
+}
+
+<h1>Mentenimiento Para Membresia</h1>
+<hr />
+
+<form asp-action="Index">
+    <div>
+        <label>Nombre</label>
+        <input type="text" name="Name" placeholder="Ingresar"/>
+    </div>
+    <div>
+        <label>Apellido</label>
+        <input type="text" name="LastName" placeholder="Ingresar"/>
+    </div>
+    <div>
+        <label>Dui</label>
+        <input type="text" name="Dui" id="inputDui" placeholder="Ingresar"/>
+    </div>
+    <div>
+        <label>Profesion u Oficio</label>
+        <select name="IdProfessionOrStudy">
+            @foreach (var item in professionOrStudies!)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Estatus</label>
+        <select name="Status">
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Buscar Miembro"/> &nbsp;&nbsp;
+        <a asp-action="Create">Nueva Membresia</a>
+    </div>
+</form>
+<h2>Tabla de Resultados</h2>
+<table id="ResultData" class="hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CivilStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProfessionOrStudy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CivilStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfessionOrStudy!.Name)
+                </td>
+                @if (item.Status == 1)
+                {
+                    <td>Activo</td>
+                }
+                else if (item.Status == 2)
+                {
+                    <td>Inactivo</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+
+        new DataTable('#ResultData', {
+            info: false,
+            order: false,
+            Response: true,
+            pagingType: 'simple_numbers',
+            language: {
+                search: 'Busqueda Rapida :',
+                searchPlaceholder: 'Ingresar',
+                lengthMenu: '_MENU_ Mostrar',
+                emptyTable: 'No Hay Datos Que Coincidan Con Su Criterio De Búsqueda.',
+                zeroRecords: 'No Existen Registros Segun La Busqueda',
+                processing: 'Procesando...',
+            }
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 8000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        // Comprobar si hay mensajes de éxito y mostrar notificaciones del sistema
+        const successMessages = {
+            Creado: '@TempData["SuccessMessageCreate"]',
+            Modificado: '@TempData["SuccessMessageUpdate"]',
+            Eliminado: '@TempData["SuccessMessageDelete"]'
+        };
+
+        for (const messageType in successMessages) {
+            const message = successMessages[messageType];
+            if (message) {
+                Toast.fire({
+                    icon: "success",
+                    title: `¡${messageType} Exitosamente!`,
+                    text: message
+                });
+            }
+        }
+    </script>
+}
