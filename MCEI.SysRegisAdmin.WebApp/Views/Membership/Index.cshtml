@@ -24,7 +24,7 @@
     </div>
     <div>
         <label>Profesion u Oficio</label>
-        <select name="IdProfessionOrStudy">
+        <select id="IdProfessionOrStudy" name="IdProfessionOrStudy">
             @foreach (var item in professionOrStudies!)
             {
                 <option value="@item.Id">@item.Name</option>
@@ -111,6 +111,11 @@
 
 @section Scripts {
     <script>
+
+        // Inicializamos el Plugin de Autocompletado y Busqueda De Profesion u Oficio
+        $(document).ready(function () {
+            $('#IdProfessionOrStudy').select2();
+        });
 
         new DataTable('#ResultData', {
             info: false,
