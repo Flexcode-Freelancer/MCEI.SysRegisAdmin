@@ -9,6 +9,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class HomeController : Controller
     {
+        [Authorize(Roles = "Desarrollador")]
         public IActionResult Index()
         {
             return View();
