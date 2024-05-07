@@ -1,0 +1,393 @@
+﻿@using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN
+@model MCEI.SysRegisAdmin.EN.Membership___EN.Membership
+
+@{
+    ViewData["Title"] = "Editar Membresia"; //Titulo de la Pestaña
+    List<ProfessionOrStudy> professionOrStudies = ViewBag.ProfessionOrStudies as List<ProfessionOrStudy>;
+}
+<h1>Modificar Membresia Existente</h1>
+<span>@ViewBag.Error</span>
+<hr />
+<form id="Form" asp-action="Edit" onsubmit="CreateRecord(event)" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" asp-for="Id" />
+    <h3>Informacion Personal</h3>
+    <hr />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName"/>
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Dui"></label>
+        <input asp-for="Dui" id="inputDui"/>
+        <span asp-validation-for="Dui"></span>
+    </div>
+    <div>
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth"/>
+        <span asp-validation-for="DateOfBirth"></span>
+    </div>
+    <div>
+        <label asp-for="Age"></label>
+        <input asp-for="Age" />
+        <span asp-validation-for="Age"></span>
+    </div>
+    <div>
+        <label asp-for="Gender"></label>
+        <select name="Gender" id="cbxGender">
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+        </select>
+        <span asp-validation-for="Gender"></span>
+    </div>
+    <div>
+        <label asp-for="CivilStatus"></label>
+        <select name="CivilStatus" id="cbxCivilStatus">
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="Soltero/a">Soltero/a</option>
+            <option value="Casado/a">Casado/a</option>
+            <option value="Divorciado/a">Divorciado/a</option>
+            <option value="Viudo/a">Viudo/a</option>
+        </select>
+        <span asp-validation-for="CivilStatus"></span>
+    </div>
+    <div>
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" id="inputPhone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address"/>
+        <span asp-validation-for="Address"></span>
+    </div>
+    <div>
+        <label asp-for="IdProfessionOrStudy"></label>
+        <select name="IdProfessionOrStudy" id="cbxProfessionOrStudy">
+            @foreach (var profesionOrStudy in professionOrStudies!)
+            {
+                <option value="@profesionOrStudy.Id">@profesionOrStudy.Name</option>
+            }
+        </select>
+        <span asp-validation-for="IdProfessionOrStudy"></span>
+    </div>
+    <div>
+        <label asp-for="PlaceOfWorkOrStudy"></label>
+        <input asp-for="PlaceOfWorkOrStudy"/>
+        <span asp-validation-for="PlaceOfWorkOrStudy"></span>
+    </div>
+    <div>
+        <label asp-for="WorkOrStudyPhone"></label>
+        <input asp-for="WorkOrStudyPhone" id="inputPhoneEmergency" />
+        <span asp-validation-for="WorkOrStudyPhone"></span>
+    </div>
+    <br />
+    <h3>Informacion Complementaria</h3>
+    <hr />
+    <div class="mb-3">
+        <label asp-for="ConversionDate"></label>
+        <input asp-for="ConversionDate"/>
+        <span asp-validation-for="ConversionDate"></span>
+    </div>
+    <div>
+        <label asp-for="PlaceOfConversion"></label>
+        <input asp-for="PlaceOfConversion"/>
+        <span asp-validation-for="PlaceOfConversion"></span>
+    </div>
+    <div>
+        <label asp-for="WaterBaptism"></label>
+        <select name="WaterBaptism" id="cbxWaterBaptism">
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="Si, Dentro de la Mision">Si, Dentro de la Mision</option>
+            <option value="Si, Fuera de la Mision">Si, Fuera de la Mision</option>
+        </select>
+        <span asp-validation-for="WaterBaptism"></span>
+    </div>
+    <div>
+        <label asp-for="BaptismOfTheHolySpirit"></label>
+        <select name="BaptismOfTheHolySpirit" id="cbxBaptismOfTheHolySpirit">
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+        </select>
+        <span asp-validation-for="BaptismOfTheHolySpirit" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="PastorsName"></label>
+        <input asp-for="PastorsName"/>
+        <span asp-validation-for="PastorsName"></span>
+    </div>
+    <div>
+        <label asp-for="SupervisorsName"></label>
+        <input asp-for="SupervisorsName"/>
+        <span asp-validation-for="SupervisorsName"></span>
+    </div>
+    <div>
+        <label asp-for="LeadersName"></label>
+        <input asp-for="LeadersName"/>
+        <span asp-validation-for="LeadersName"></span>
+    </div>
+    <div>
+        <label asp-for="TimeToGather"></label>
+        <input asp-for="TimeToGather"/>
+        <span asp-validation-for="TimeToGather"></span>
+    </div>
+    <div>
+        <label asp-for="Zone"></label>
+        <select name="Zone" id="cbxZone">
+            <option value="1">Zona 1</option>
+            <option value="2">Zona 2</option>
+            <option value="3">Zona 3</option>
+        </select>
+        <span asp-validation-for="Zone"></span>
+    </div>
+    <div>
+        <label asp-for="District"></label>
+        <select name="District" id="cbxDistrict">
+            <option value="1">Distrito 1</option>
+            <option value="2">Distrito 2</option>
+        </select>
+        <span asp-validation-for="District"></span>
+    </div>
+    <div>
+        <label asp-for="Sector"></label>
+        <select name="Sector" id="cbxSector">
+            <option value="1">Sector 1</option>
+            <option value="2">Sector 2</option>
+            <option value="3">Sector 3</option>
+        </select>
+        <span asp-validation-for="Sector"></span>
+    </div>
+    <div>
+        <label asp-for="Cell"></label>
+        <select name="Cell" id="cbxCell">
+            <option value="1">Celula 1</option>
+            <option value="2">Celula 2</option>
+            <option value="3">Celula 3</option>
+            <option value="4">Celula 4</option>
+            <option value="5">Celula 5</option>
+        </select>
+        <span asp-validation-for="Cell"></span>
+    </div>
+    <div>
+        <label asp-for="Status"></label>
+        <select name="Status" id="cbxStatus">
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+        </select>
+        <span asp-validation-for="Status"></span>
+    </div>
+    <div>
+        <label asp-for="CommentsOrObservations"></label>
+        <input asp-for="CommentsOrObservations"/>
+        <span asp-validation-for="CommentsOrObservations"></span>
+    </div>
+    <div>
+        <label asp-for="DateCreated"></label>
+        <input asp-for="DateCreated" type="date" readonly />
+        <span asp-validation-for="DateCreated"></span>
+    </div>
+    <div>
+        <label asp-for="DateModification"></label>
+        <input asp-for="DateModification" type="date" readonly />
+        <span asp-validation-for="DateModification"></span>
+    </div>
+    <div>
+        <svg id="barcode"></svg>
+    </div>
+    <div>
+        <label for="imagen">Seleccionar imagen:</label>
+        <input type="file" id="imagen" name="imagen" onchange="mostrarImagen()" asp-for="ImageData" />
+    </div>
+    <div>
+        <img id="imagenPreview" src="@(ViewBag.ImageUrl != null ? "data:image/jpeg;base64," + ViewBag.ImageUrl : "")" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px;" />
+    </div>
+    <div>
+        <input type="submit" value="Modificar Membresia" />
+        <a asp-action="Index">Regresar a la Lista</a>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        // ------------------------- Inicialización -------------------------
+        // Inicializa los valores de los elementos del formulario a partir del modelo
+        $(document).ready(function () {
+            $("#cbxGender").val('@Model.Gender');
+            $("#cbxCivilStatus").val('@Model.CivilStatus');
+            $("#cbxProfessionOrStudy").val('@Model.IdProfessionOrStudy');
+            $("#cbxWaterBaptism").val('@Model.WaterBaptism');
+            $("#cbxBaptismOfTheHolySpirit").val('@Model.BaptismOfTheHolySpirit');
+            $("#cbxZone").val('@Model.Zone');
+            $("#cbxDistrict").val('@Model.District');
+            $("#cbxSector").val('@Model.Sector');
+            $("#cbxCell").val('@Model.Cell');
+            $("#cbxStatus").val('@Model.Status');
+        });
+
+        // -------------------------- Configuraciones ------------------------
+        // Inicializa el plugin select2 para el combo de profesiones o estudios
+        $(document).ready(function () {
+            $('#cbxProfessionOrStudy').select2();
+        });
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+
+        // --------------------------- Funciones -----------------------------
+        // Función para mostrar alerta de error
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error'
+            });
+        }
+
+        // Función para formatear el DUI con guiones
+        function formatDui(inputValue) {
+            inputValue = inputValue.replace(/\D/g, ''); // Remover todos los caracteres que no sean dígitos
+            var formattedValue = '';
+            for (var i = 0; i < inputValue.length; i++) {
+                if (i == 8) {
+                    formattedValue += '-' + inputValue.charAt(i);
+                } else {
+                    formattedValue += inputValue.charAt(i);
+                }
+            }
+            formattedValue = formattedValue.substring(0, 10); // Limitar la longitud total a 10 caracteres, incluyendo el guion
+            return formattedValue;
+        }
+
+        // Función para actualizar el código de barras basado en el DUI
+        function actualizarCodigoDeBarras() {
+            var codeDui = document.getElementById("inputDui").value;
+            JsBarcode("#barcode", codeDui);
+        }
+
+        // Función para calcular la edad en base a la fecha de nacimiento
+        function calculateAge() {
+            const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
+            const ageInput = document.querySelector('input[name="Age"]');
+            const birthDateValue = birthDateInput.value.trim();
+
+            if (birthDateValue !== "") {
+                const birthDate = new Date(birthDateValue);
+                const currentDate = new Date();
+                let age = currentDate.getFullYear() - birthDate.getFullYear(); // Calcular la edad restando el año de nacimiento del año actual
+
+                // Ajustar la edad si la fecha de nacimiento aún no ha ocurrido este año
+                if (birthDate.getMonth() > currentDate.getMonth() ||
+                    (birthDate.getMonth() === currentDate.getMonth() && birthDate.getDate() > currentDate.getDate())) {
+                    age--;
+                }
+                ageInput.value = age; // Actualizar el campo de edad
+            } else {
+                ageInput.value = ""; // Desactivar el campo de edad si no se proporciona ninguna fecha de nacimiento
+            }
+        }
+
+        // Función para formatear los números de teléfono con un guion
+        function formatPhoneNumber(input) {
+            let phoneNumber = input.value.replace(/\D/g, ''); // Elimina cualquier carácter que no sea número
+            if (phoneNumber.length > 4) {
+                phoneNumber = phoneNumber.slice(0, 4) + '-' + phoneNumber.slice(4, 8);
+            }
+            input.value = phoneNumber;
+        }
+
+        // Función para mostrar vista previa de la imagen seleccionada
+        function mostrarImagen() {
+            var archivo = document.getElementById('imagen').files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var imagenPreview = document.getElementById('imagenPreview');
+                imagenPreview.src = e.target.result;
+                imagenPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(archivo);
+        }
+
+        // ------------------------- Eventos -------------------------
+        // Asignar eventos a los elementos del formulario
+        document.addEventListener("DOMContentLoaded", function () {
+            // Asigna eventos para el DUI
+            document.getElementById('inputDui').addEventListener('input', function (event) {
+                var inputValue = event.target.value;
+                var formattedValue = formatDui(inputValue);
+                event.target.value = formattedValue;
+                actualizarCodigoDeBarras();
+            });
+
+            // Asigna evento para la fecha de nacimiento
+            const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
+            birthDateInput.addEventListener('change', calculateAge);
+
+            // Asigna eventos para los números de teléfono
+            const inputPhone = document.getElementById('inputPhone');
+            const inputPhoneEmergency = document.getElementById('inputPhoneEmergency');
+            inputPhone.addEventListener('input', function (e) {
+                formatPhoneNumber(e.target);
+            });
+            inputPhoneEmergency.addEventListener('input', function (e) {
+                formatPhoneNumber(e.target);
+            });
+
+            // Llamadas iniciales
+            actualizarCodigoDeBarras();
+            calculateAge();
+        });
+
+        // -------------------- Confirmación de registro --------------------
+        function CreateRecord(e) {
+            e.preventDefault();
+            const form = document.getElementById('Form');
+            const inputs = document.querySelectorAll('.form-input');
+            const nameFields = ['Name', 'LastName', 'PastorsName', 'SupervisorsName', 'LeadersName', 'TimeToGather'];
+            const regex = /^[A-ZÑa-zñáéíóúÁÉÍÓÚ. ]+$/;
+
+            let isValid = true;
+
+            // Validar que los campos nameFields solo contengan letras, punto y espacios
+            nameFields.forEach((field) => {
+                const input = document.querySelector(`#${field}`);
+                if (!regex.test(input.value)) {
+                    isValid = false;
+                }
+            });
+
+            // Si la validación falla, muestra una alerta advirtiendo al usuario
+            if (!isValid) {
+                Swal.fire({
+                    title: '!Advertencia!',
+                    text: 'Ciertos Campos Solo Deben Tener Letras, Revisa Tu Ficha',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return;
+            }
+
+            // Si todos los campos son válidos, muestra la alerta de confirmación
+            Swal.fire({
+                title: '¿Modificar Registro Existente?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Modificar Registro'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
+}
