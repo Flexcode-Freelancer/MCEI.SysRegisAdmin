@@ -37,7 +37,64 @@ namespace MCEI.SysRegisAdmin.DAL.Membership___DAL
         }
         #endregion
 
-        
+        #region METODO PARA MODIFICAR
+        // Metodo Para Modificar Un Registro Existente De La Base De Datos
+        public static async Task<int> UpdateAsync(Membership memberships)
+        {
+            int result = 0;
+            using (var dbContext = new ContextBD())
+            {
+                var membershipDB = await dbContext.Memberships.FirstOrDefaultAsync(m => m.Id == memberships.Id);
+                if (membershipDB != null)
+                {
+                    bool membershipExists = await ExistMembership(memberships, dbContext);
+                    if (membershipExists == false)
+                    {
+                        membershipDB.Name = memberships.Name;
+                        membershipDB.LastName = memberships.LastName;
+                        membershipDB.Dui = memberships.Dui;
+                        membershipDB.DateOfBirth = memberships.DateOfBirth;
+                        membershipDB.Age = memberships.Age;
+                        membershipDB.Gender = memberships.Gender;
+                        membershipDB.CivilStatus = memberships.CivilStatus;
+                        membershipDB.Phone = memberships.Phone;
+                        membershipDB.Address = memberships.Address;
+                        membershipDB.IdProfessionOrStudy = memberships.IdProfessionOrStudy;
+                        membershipDB.PlaceOfWorkOrStudy = memberships.PlaceOfWorkOrStudy;
+                        membershipDB.ConversionDate = memberships.ConversionDate;
+                        membershipDB.PlaceOfConversion = memberships.PlaceOfConversion;
+                        membershipDB.WaterBaptism = memberships.WaterBaptism;
+                        membershipDB.BaptismOfTheHolySpirit = memberships.BaptismOfTheHolySpirit;
+                        membershipDB.PastorsName = memberships.PastorsName;
+                        membershipDB.SupervisorsName = memberships.SupervisorsName;
+                        membershipDB.LeadersName = memberships.LeadersName;
+                        membershipDB.TimeToGather = memberships.TimeToGather;
+                        membershipDB.Zone = memberships.Zone;
+                        membershipDB.District = memberships.District;
+                        membershipDB.Sector = memberships.Sector;
+                        membershipDB.Cell = memberships.Cell;
+                        membershipDB.Status = memberships.Status;
+                        membershipDB.CommentsOrObservations = memberships.CommentsOrObservations;
+                        membershipDB.DateCreated = memberships.DateCreated;
+                        membershipDB.DateModification = memberships.DateModification;
+                        membershipDB.ImageData = memberships.ImageData;
+
+                        dbContext.Update(membershipDB);
+                        result = await dbContext.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new Exception("Membresía ya existente, vuelve a intentarlo nuevamente.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Membresía no encontrada para actualizar.");
+                }
+            }
+            return result;
+        }
+        #endregion
 
 
 
