@@ -29,6 +29,10 @@
         <span asp-validation-for="Dui"></span>
     </div>
     <div>
+        <input type="checkbox" id="isMinorCheckbox" />
+        <label>Soy Menor de Edad</label>
+    </div>
+    <div>
         <label asp-for="DateOfBirth"></label>
         <input asp-for="DateOfBirth"/>
         <span asp-validation-for="DateOfBirth"></span>
@@ -230,6 +234,31 @@
             $("#cbxSector").val('@Model.Sector');
             $("#cbxCell").val('@Model.Cell');
             $("#cbxStatus").val('@Model.Status');
+
+            // Captura el checkbox y el campo de entrada Dui
+            const isMinorCheckbox = document.getElementById("isMinorCheckbox");
+            const duiInput = document.getElementById("inputDui");
+
+            // Verifica si el campo de entrada Dui tiene un formato específico
+            const duiValue = duiInput.value.trim();
+            const duiPattern = /^[A-Z]{2}\d{6}$/; // Define el formato esperado: dos letras seguidas de seis números
+
+            if (duiPattern.test(duiValue)) {
+                // Si el DUI cumple con el formato específico, marca el checkbox
+                isMinorCheckbox.checked = true;
+                // Establece el campo Dui en solo lectura
+                duiInput.readOnly = true;
+                // Genera el valor para DUI si es necesario (opcional según tu lógica)
+                generateDuiValue();
+            } else {
+                // Si el DUI no cumple con el formato, el checkbox permanece desmarcado
+                isMinorCheckbox.checked = false;
+                // Permite que el campo Dui sea editable
+                duiInput.readOnly = false;
+            }
+
+            // Actualiza el código de barras con el valor actual de Dui
+            actualizarCodigoDeBarras();
         });
 
         // -------------------------- Configuraciones ------------------------
@@ -252,6 +281,31 @@
                 icon: 'error'
             });
         }
+
+        // Función para manejar el evento de cambio del checkbox
+        function handleCheckboxChange() {
+            const duiInput = document.getElementById("inputDui");
+            if (isMinorCheckbox.checked) {
+                // Si el checkbox está marcado, marca el campo Dui como solo lectura
+                duiInput.readOnly = true;
+                // Genera el valor para Dui si es necesario (opcional)
+                generateDuiValue();
+            } else {
+                // Si el checkbox está desmarcado, permite editar el campo Dui
+                duiInput.readOnly = false;
+                // Puedes decidir si quieres limpiar el valor de Dui o no
+            }
+        }
+
+        // Asigna el evento de cambio al checkbox
+        const isMinorCheckbox = document.getElementById("isMinorCheckbox");
+        isMinorCheckbox.addEventListener("change", handleCheckboxChange);
+
+        // Asigna evento `input` a `duiInput` para que actualice el código de barras cada vez que se modifique `Dui`
+        const duiInput = document.getElementById("inputDui");
+        duiInput.addEventListener("input", function () {
+            actualizarCodigoDeBarras();
+        });
 
         // Función para formatear el DUI con guiones
         function formatDui(inputValue) {
