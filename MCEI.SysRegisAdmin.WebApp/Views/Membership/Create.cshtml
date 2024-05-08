@@ -28,6 +28,10 @@
         <span asp-validation-for="Dui"></span>
     </div>
     <div>
+        <input type="checkbox" id="isMinorCheckbox" />
+        <label>Soy Menor de Edad</label>
+    </div>
+    <div>
         <label asp-for="DateOfBirth"></label>
         <input asp-for="DateOfBirth"/>
         <span asp-validation-for="DateOfBirth"></span>
@@ -222,6 +226,84 @@
         {
             @:showErrorAlert('@ViewBag.Error');
         }
+        // Captura el checkbox "Soy menor de edad"
+        var isMinorCheckbox = document.getElementById("isMinorCheckbox");
+
+        // Campos de nombre, apellido y fecha de nacimiento
+        const nameInput = document.querySelector('input[name="Name"]');
+        const lastNameInput = document.querySelector('input[name="LastName"]');
+        const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
+        const duiInput = document.getElementById("inputDui");
+
+        // Función para formatear la fecha en DDMMAA
+        function formatBirthDate(birthDate) {
+            const day = String(birthDate.getDate() +1).padStart(2, '0');
+            const month = String(birthDate.getMonth() + 1).padStart(2, '0');
+            const year = String(birthDate.getFullYear()).slice(-2);
+            return `${day}${month}${year}`;
+        }
+
+        // Función para generar el valor para Dui
+        function generateDuiValue() {
+            // Verifica que los campos de nombre, apellido y fecha de nacimiento no estén vacíos
+            const nameValue = nameInput.value.trim();
+            const lastNameValue = lastNameInput.value.trim();
+            const birthDateValue = birthDateInput.value.trim();
+
+            // Si alguno de los campos está vacío, no establecer ningún valor en `Dui`
+            if (!nameValue || !lastNameValue || !birthDateValue) {
+                return;
+            }
+
+            // Extrae las iniciales de los campos de nombre y apellido
+            const nameInitial = nameValue.charAt(0).toUpperCase();
+            const lastNameInitial = lastNameValue.charAt(0).toUpperCase();
+
+            // Formatea la fecha de nacimiento
+            const birthDate = new Date(birthDateValue);
+            const formattedBirthDate = formatBirthDate(birthDate);
+
+            // Concatenar iniciales y fecha de nacimiento
+            const newDuiValue = `${nameInitial}${lastNameInitial}${formattedBirthDate}`;
+
+            // Establecer el valor generado como valor del campo Dui
+            duiInput.value = newDuiValue;
+
+            // Actualizar el código de barras con el valor de Dui
+            actualizarCodigoDeBarras();
+        }
+
+        // Función para manejar el evento de cambio del checkbox
+        function handleCheckboxChange() {
+            if (isMinorCheckbox.checked) {
+                // Si el checkbox está marcado, marcar Dui como solo lectura
+                duiInput.readOnly = true;
+                // Generar el valor para Dui
+                generateDuiValue();
+            } else {
+                // Si el checkbox está desmarcado, hacer Dui editable
+                duiInput.readOnly = false;
+                // Limpiar el campo Dui
+                duiInput.value = '';
+            }
+        }
+
+        // Función para actualizar el código de barras
+        function actualizarCodigoDeBarras() {
+            var codeDui = duiInput.value;
+            JsBarcode("#barcode", codeDui); // Generar el código de barras usando el valor actual
+        }
+
+        // Asignar el evento de cambio al checkbox
+        isMinorCheckbox.addEventListener("change", handleCheckboxChange);
+
+        // Asignar evento `input` a `duiInput` para que actualice el código de barras cada vez que se modifique `Dui`
+        duiInput.addEventListener("input", function () {
+            actualizarCodigoDeBarras();
+        });
+
+
+
         document.addEventListener("DOMContentLoaded", function () {
             // Insercion de (-) al Dui, Ademas de Generar Codigo de Barras En Base Al Dui
             function formatDui(inputValue) {
