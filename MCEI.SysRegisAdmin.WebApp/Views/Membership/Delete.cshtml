@@ -1,0 +1,277 @@
+﻿@model MCEI.SysRegisAdmin.EN.Membership___EN.Membership
+
+@{
+    ViewData["Title"] = "Eliminar Membresia"; // Titulo de la Pestaña
+}
+
+<h1>Eliminar Membresia Existente</h1>
+<span id="minor"></span>
+<p>Estas Seguro De Eliminar el Siguiente Registro? Recuerda No Puedes Revertir Los Cambios</p>
+<hr />
+<div>
+    <h2>Información Personal</h2>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dui)
+        </dt>
+        <dd id="dui-field">
+            @Html.DisplayFor(model => model.Dui)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age) Años
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CivilStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CivilStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProfessionOrStudy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProfessionOrStudy!.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceOfWorkOrStudy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfWorkOrStudy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkOrStudyPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WorkOrStudyPhone)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h2>Información Adicional</h2>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConversionDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConversionDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceOfConversion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfConversion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WaterBaptism)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WaterBaptism)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BaptismOfTheHolySpirit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BaptismOfTheHolySpirit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PastorsName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PastorsName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SupervisorsName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SupervisorsName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadersName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LeadersName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeToGather)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TimeToGather)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zone)
+        </dt>
+        <dd>
+            # @Html.DisplayFor(model => model.Zone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+        <dd>
+            # @Html.DisplayFor(model => model.District)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sector)
+        </dt>
+        <dd>
+            # @Html.DisplayFor(model => model.Sector)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cell)
+        </dt>
+        <dd>
+            # @Html.DisplayFor(model => model.Cell)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        @if (Model.Status == 1)
+        {
+            <dd>
+                Activo
+            </dd>
+        }
+        else if (Model.Status == 2)
+        {
+            <dd>
+                Inactivo
+            </dd>
+        }
+        else
+        {
+            <dd> </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentsOrObservations)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CommentsOrObservations)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateModification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageData)
+        </dt>
+        <dd>
+            <img id="imagenPreview" src="@(ViewBag.ImageUrl != null ? "data:image/jpeg;base64," + ViewBag.ImageUrl : "")" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px;" />
+        </dd>
+        <dt>
+            Codigo de Barras
+        </dt>
+        <dd>
+            <svg id="barcode"></svg>
+        </dd>
+    </dl>
+</div>
+<form id="Form" asp-action="Delete" onsubmit="CreateRecord(event)">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Eliminar Membresia"/>
+    <a asp-action="Index">Regresar a La Lista</a>
+</form>
+
+@section Scripts{
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var duiElement = document.getElementById("dui-field"); // Selecciona el elemento <dd> con el id "dui-field"
+            var duiValue = duiElement.innerText; // Obtén el valor de Dui del elemento
+            var barcodeSvg = document.getElementById("barcode"); // Selecciona el elemento <svg> con el id "barcode"
+
+            JsBarcode(barcodeSvg, duiValue); // Genera el código de barras basado en el valor de Dui
+        });
+
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error'
+            });
+        }
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+
+        // Obtener los valores de Age, Name, y LastName desde el modelo utilizando las expresiones de Razor.
+        const age = @Html.DisplayFor(model => model.Age);
+        const name = '@Html.DisplayFor(model => model.Name)';
+        const lastName = '@Html.DisplayFor(model => model.LastName)';
+        const minorSpan = document.getElementById('minor'); // Obtenemos el elemento span con ID "minor".
+
+        // Verificamos si la edad es menor o igual a 17.
+        if (age <= 17) {
+            const message = `${name} ${lastName} Actualmente Es Menor De Edad`; // Concatenamos el nombre, apellido y el mensaje requerido.
+            minorSpan.textContent = message; // Establecemos el texto del span con el mensaje.
+        } else {
+            minorSpan.textContent = ''; // Si la edad es mayor o igual a 18, vaciamos el texto del span.
+        }
+
+        function CreateRecord(e) {
+            e.preventDefault();
+            const form = document.getElementById('Form');
+
+            Swal.fire({
+                title: '¿Eliminar Este Registro?',
+                text: '¿Estas Seguro De Eliminar el Siguiente Registro? Recuerda No Puedes Revertir Los Cambios',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Si, Eliminar Registro'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
+}
