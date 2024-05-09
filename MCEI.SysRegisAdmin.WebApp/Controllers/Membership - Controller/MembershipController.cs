@@ -3,6 +3,7 @@
 using MCEI.SysRegisAdmin.BL.Membership___BL;
 using MCEI.SysRegisAdmin.BL.ProfessionOrStudy___BL;
 using MCEI.SysRegisAdmin.EN.Membership___EN;
+using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -145,6 +146,33 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.Membership___Controller
                 ViewBag.Error = ex.Message;
                 ViewBag.ProfessionOrStudies = await professionOrStudyBL.GetAllAsync();
                 return View(membership); // Devolver la vista con el objeto Membership para que el usuario pueda corregir los datos
+            }
+        }
+        #endregion
+
+        #region METODO PARA MOSTRAR DETALLES
+        // Accion Que Muestra El Detalle De Un Registro
+        public async Task<IActionResult> Details(int id)
+        {
+            try
+            {
+                Membership membership = await membershipBL.GetByIdAsync(new Membership { Id = id });
+                if (membership == null)
+                {
+                    return NotFound();
+                }
+                // Convertir el array de bytes en imagen para mostrar en la vista
+                if (membership.ImageData != null && membership.ImageData.Length > 0)
+                {
+                    ViewBag.ImageUrl = Convert.ToBase64String(membership.ImageData);
+                }
+                membership.ProfessionOrStudy = await professionOrStudyBL.GetByIdAsync(new ProfessionOrStudy { Id = membership.IdProfessionOrStudy });
+                return View(membership); // Retornamos los Detalles a La Vista
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(); // Devolver la vista sin ningún objeto Membership
             }
         }
         #endregion
