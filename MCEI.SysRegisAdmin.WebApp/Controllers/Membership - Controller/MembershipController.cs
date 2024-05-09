@@ -85,6 +85,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.Membership___Controller
 
         #region METODO PARA MODIFICAR
         // Acción que muestra la vista de modificar
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Edit(int id)
         {
             try
@@ -110,6 +111,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.Membership___Controller
         }
 
         // Acción que recibe los datos del formulario para ser enviados a la base de datos
+        [Authorize(Roles = "Desarrollador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Membership membership, IFormFile imagen)
@@ -152,6 +154,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.Membership___Controller
 
         #region METODO PARA MOSTRAR DETALLES
         // Accion Que Muestra El Detalle De Un Registro
+        [Authorize(Roles = "Desarrollador")]
         public async Task<IActionResult> Details(int id)
         {
             try
@@ -173,6 +176,59 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.Membership___Controller
             {
                 ViewBag.Error = ex.Message;
                 return View(); // Devolver la vista sin ningún objeto Membership
+            }
+        }
+        #endregion
+
+        #region METODO PARA ELIMINAR
+        // Accion Que Muestra La Vista De Eliminar
+        [Authorize(Roles = "Desarrollador")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                Membership membership = await membershipBL.GetByIdAsync(new Membership { Id = id });
+                if (membership == null)
+                {
+                    return NotFound();
+                }
+                // Convertir el array de bytes en imagen para mostrar en la vista
+                if (membership.ImageData != null && membership.ImageData.Length > 0)
+                {
+                    ViewBag.ImageUrl = Convert.ToBase64String(membership.ImageData);
+                }
+                ViewBag.ProfessionOrStudies = await professionOrStudyBL.GetAllAsync();
+                return View(membership);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(); // Devolver la vista sin ningún objeto Membership
+            }            
+        }
+
+        // Accion Que Recibe Los Datos Del Formulario Para Ser Enviados a La BD
+        [Authorize(Roles = "Desarrollador")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id, Membership membership)
+        {
+            try
+            {
+                Membership membershipDB = await membershipBL.GetByIdAsync(membership);
+                int result = await membershipBL.DeleteAsync(membershipDB);
+                TempData["SuccessMessageDelete"] = "Miembro Eliminado Exitosamente";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                var membershipBD = await membershipBL.GetByIdAsync(membership);
+                if (membershipBD == null)
+                    membershipBD = new Membership();
+                if (membershipBD.Id > 0)
+                    membershipBD.ProfessionOrStudy = await professionOrStudyBL.GetByIdAsync(new ProfessionOrStudy { Id = membershipBD.IdProfessionOrStudy });
+                return View(membershipBD);
             }
         }
         #endregion
