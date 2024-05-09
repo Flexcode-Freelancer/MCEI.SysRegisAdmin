@@ -96,10 +96,26 @@ namespace MCEI.SysRegisAdmin.DAL.Membership___DAL
         }
         #endregion
 
-
-
-
-
+        #region METODO PARA ELIMINAR
+        // Metodo Para Eliminar Un Registro Existente En La Base De Datos
+        public static async Task<int> DeleteAsync(Membership memberships)
+        {
+            int result = 0;
+            // Un bloque de conexion que mientras se permanezca en el bloque la base de datos permanecera abierta y al terminar se destruira
+            using (var dbContext = new ContextBD())
+            {
+                // Obtiene el primer registro con el Id específico de memberships desde la base de datos.
+                var membershipDB = await dbContext.Memberships.FirstOrDefaultAsync(m => m.Id == memberships.Id);
+                // Validamos que membershipDB sea diferente de NULL
+                if (membershipDB != null)
+                {
+                    dbContext.Memberships.Remove(membershipDB);
+                    result = await dbContext.SaveChangesAsync();
+                }
+            }
+            return result;  // Si se realizo con exito devuelve 1 sino devuelve 0
+        }
+        #endregion
 
         #region METODO PARA MOSTRAR
         // Metodo Para Mostrar La Lista De Registros
