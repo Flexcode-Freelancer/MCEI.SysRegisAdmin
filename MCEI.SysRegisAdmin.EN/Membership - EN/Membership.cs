@@ -23,13 +23,13 @@ namespace MCEI.SysRegisAdmin.EN.Membership___EN
 
         [Required(ErrorMessage = "El Nombre Es Requerido")]
         [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombres")]
         [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Debe contener solo Letras")]
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El Apellido Es Requerido")]
         [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
-        [Display(Name = "Apellido")]
+        [Display(Name = "Apellidos")]
         [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Debe contener solo Letras")]
         public string LastName { get; set; } = string.Empty;
 
@@ -69,7 +69,7 @@ namespace MCEI.SysRegisAdmin.EN.Membership___EN
 
         [Required(ErrorMessage = "La Direccion Es Requerida")]
         [StringLength(100, ErrorMessage = "Maximo 100 caracteres")]
-        [Display(Name = "Direccion")]
+        [Display(Name = "Direccion de Residencia")]
         public string Address { get; set; } = string.Empty;
 
         [ForeignKey("ProfessionOrStudy")]
@@ -79,12 +79,12 @@ namespace MCEI.SysRegisAdmin.EN.Membership___EN
 
         [Required(ErrorMessage = "Lugar De Trabajo u Oficio Es Requerido")]
         [StringLength(100, ErrorMessage = "Maximo 100 caracteres")]
-        [Display(Name = "Lugar De Trabajo u Oficio")]
+        [Display(Name = "Lugar De Trabajo o Estudio")]
         public string PlaceOfWorkOrStudy { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Telefono Del Trabajo u Oficio Es Requerido")]
         [StringLength(9, ErrorMessage = "Maximo 9 caracteres")]
-        [Display(Name = "Telefono De Trabajo u Oficio")]
+        [Display(Name = "Telefono De Trabajo o Estudio")]
         [RegularExpression("^[0-9-]+$", ErrorMessage = "El Telefono de trabajo o estudio debe contener solo números")]
         public string WorkOrStudyPhone { get; set; } = string.Empty;
 
@@ -111,19 +111,19 @@ namespace MCEI.SysRegisAdmin.EN.Membership___EN
 
         [Required(ErrorMessage = "Nombre Del Pastor Es Requerido")]
         [StringLength(100, ErrorMessage = "Maximo 100 caracteres")]
-        [Display(Name = "Pastor")]
+        [Display(Name = "Nombre Del Pastor")]
         [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Debe contener solo Letras")]
         public string PastorsName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El Nombre Del Supervisor Es Requerido")]
         [StringLength(100, ErrorMessage = "Maximo 100 caracteres")]
-        [Display(Name = "Supervisor")]
+        [Display(Name = "Nombre Del Supervisor")]
         [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Debe contener solo Letras")]
         public string SupervisorsName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El Nombre Del Lider Es Requerido")]
         [StringLength(100, ErrorMessage = "Maximo 100 caracteres")]
-        [Display(Name = "Lider")]
+        [Display(Name = "Nombre Del Lider Lider")]
         [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Debe contener solo Letras")]
         public string LeadersName { get; set; } = string.Empty;
 
@@ -167,7 +167,7 @@ namespace MCEI.SysRegisAdmin.EN.Membership___EN
         [Display(Name = "Fecha de Modificacion")]
         public DateTime DateModification { get; set; }
 
-        [Display(Name = "Imagen")]
+        [Display(Name = "Fotografia")]
         public byte[]? ImageData { get; set; }
 
         #endregion
