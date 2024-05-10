@@ -10,6 +10,7 @@ using MCEI.SysRegisAdmin.EN.User___EN;
 using MCEI.SysRegisAdmin.EN.Role___EN;
 using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN;
 using MCEI.SysRegisAdmin.EN.Membership___EN;
+using MCEI.SysRegisAdmin.EN.Privilege___EN;
 
 
 #endregion
@@ -24,6 +25,7 @@ namespace MCEI.SysRegisAdmin.DAL
         public DbSet<User> User { get; set; }
         public DbSet<ProfessionOrStudy> ProfessionOrStudys { get; set; }
         public DbSet<Membership> Memberships { get; set; }
+        public DbSet<Privilege> Priviliges { get; set; }
         #endregion
 
         // Metodo de Conexion a la Base de Datos
