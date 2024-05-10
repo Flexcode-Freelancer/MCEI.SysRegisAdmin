@@ -62,3 +62,8 @@ CREATE TABLE Memberships (
     CONSTRAINT FK_Memberships_ProfessionOrStudys FOREIGN KEY (IdProfessionOrStudy) REFERENCES ProfessionOrStudys(Id)
 );
 GO
+CREATE TABLE Privileges(
+    Id INT PRIMARY KEY IDENTITY (1,1),
+    [Name] VARCHAR (100) NOT NULL,
+);
+GO
