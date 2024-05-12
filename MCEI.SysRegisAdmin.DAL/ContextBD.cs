@@ -25,7 +25,7 @@ namespace MCEI.SysRegisAdmin.DAL
         public DbSet<User> User { get; set; }
         public DbSet<ProfessionOrStudy> ProfessionOrStudys { get; set; }
         public DbSet<Membership> Memberships { get; set; }
-        public DbSet<Privilege> Priviliges { get; set; }
+        public DbSet<Privilege> Privileges { get; set; }
         #endregion
 
         // Metodo de Conexion a la Base de Datos
