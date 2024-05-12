@@ -1,0 +1,95 @@
+﻿@model IEnumerable<MCEI.SysRegisAdmin.EN.Privilege___EN.Privilege>
+
+@{
+    ViewData["Title"] = "Privilegio"; // Titulo de la Pestaña
+}
+
+<h1>Mantenimiento Para Privilegio</h1>
+<hr />
+<form asp-action="Index">
+    <div>
+        <label>Nombre</label>
+        <input type="text" name="Name" placeholder="Ingresar" />
+    </div>
+    <div>
+        <input type="submit" value="Buscar" /> &nbsp;&nbsp; |
+        <a asp-action="Create">Nuevo Privilegio</a>
+    </div>
+</form>
+<h2>Tabla de Resultados</h2>
+<table id="ResultData" class="hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+
+        new DataTable('#ResultData', {
+            info: false,
+            order: false,
+            Response: true,
+            pagingType: 'simple_numbers',
+            language: {
+                search: 'Busqueda Rapida :',
+                searchPlaceholder: 'Ingresar',
+                lengthMenu: '_MENU_ Mostrar',
+                emptyTable: 'No Hay Datos Que Coincidan Con Su Criterio De Búsqueda.',
+                zeroRecords: 'No Existen Registros Segun La Busqueda',
+                processing: 'Procesando...',
+            }
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 8000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        // Comprobar si hay mensajes de éxito y mostrar notificaciones del sistema
+        const successMessages = {
+            Creado: '@TempData["SuccessMessageCreate"]',
+            Modificado: '@TempData["SuccessMessageUpdate"]',
+            Eliminado: '@TempData["SuccessMessageDelete"]'
+        };
+
+        for (const messageType in successMessages) {
+            const message = successMessages[messageType];
+            if (message) {
+                Toast.fire({
+                    icon: "success",
+                    title: `¡${messageType} Exitosamente!`,
+                    text: message
+                });
+            }
+        }
+    </script>
+
+}
