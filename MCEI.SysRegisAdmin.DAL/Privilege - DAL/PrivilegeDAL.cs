@@ -25,7 +25,7 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
                 bool privilegeExists = await ExistPrivilege(privilege, dbContext);
                 if (privilegeExists == false)
                 {
-                    dbContext.Priviliges.Add(privilege);
+                    dbContext.Privileges.Add(privilege);
                     result = await dbContext.SaveChangesAsync();
                 }
                 else
@@ -42,7 +42,7 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
             int result = 0;
             using (var dbContext = new ContextBD())
             {
-                var privilegeDB = await dbContext.Priviliges.FirstOrDefaultAsync(c => c.Id == privilege.Id);
+                var privilegeDB = await dbContext.Privileges.FirstOrDefaultAsync(c => c.Id == privilege.Id);
                 if (privilegeDB != null)
                 {
                     bool privilegeExist = await ExistPrivilege(privilege, dbContext);
@@ -68,10 +68,10 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
             int result = 0;
             using (var dbContext = new ContextBD())
             {
-                var privilegeDB = await dbContext.Priviliges.FirstOrDefaultAsync(c => c.Id == privilege.Id);
+                var privilegeDB = await dbContext.Privileges.FirstOrDefaultAsync(c => c.Id == privilege.Id);
                 if (privilegeDB != null)
                 {
-                    dbContext.Priviliges.Remove(privilegeDB);
+                    dbContext.Privileges.Remove(privilegeDB);
                     result = await dbContext.SaveChangesAsync();
                 }
                 return result;
@@ -86,7 +86,7 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
             var privileges = new List<Privilege>();
             using (var dbContext = new ContextBD())
             {
-                privileges = await dbContext.Priviliges.ToListAsync();
+                privileges = await dbContext.Privileges.ToListAsync();
             }
             return privileges;
         }
@@ -99,7 +99,7 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
             var privilegeDB = new Privilege();
             using (var dbContext = new ContextBD())
             {
-                privilegeDB = await dbContext.Priviliges.FirstOrDefaultAsync(c => c.Id == privilege.Id);
+                privilegeDB = await dbContext.Privileges.FirstOrDefaultAsync(c => c.Id == privilege.Id);
             }
             return privilegeDB!;
         }
@@ -131,7 +131,7 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
             var privilegee = new List<Privilege>();
             using (var dbContext = new ContextBD())
             {
-                var select = dbContext.Priviliges.AsQueryable();
+                var select = dbContext.Privileges.AsQueryable();
                 select = QuerySelect(select, privilege);
                 privilegee = await select.ToListAsync();
             }
@@ -144,7 +144,7 @@ namespace MCEI.SysRegisAdmin.DAL.Privilege___EN
         private static async Task<bool> ExistPrivilege(Privilege privilege, ContextBD dbContext)
         {
             bool result = false;
-            var privileges = await dbContext.Priviliges.FirstOrDefaultAsync(p => p.Name == privilege.Name && p.Id != privilege.Id);
+            var privileges = await dbContext.Privileges.FirstOrDefaultAsync(p => p.Name == privilege.Name && p.Id != privilege.Id);
             if (privileges != null && privileges.Id > 0 && privileges.Name == privilege.Name)
                 result = true;
 
