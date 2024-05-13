@@ -1,0 +1,63 @@
+﻿@model MCEI.SysRegisAdmin.EN.Privilege___EN.Privilege
+
+@{
+    ViewData["Title"] = "Crear Privilegio"; // Titulo de la Pestaña
+}
+
+<h1>Crear Nuevo Privilegio</h1>
+<span>@ViewBag.Error</span>
+<hr />
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        ShowCreatePrompt();
+    });
+
+    async function ShowCreatePrompt() {
+        const { value: name } = await Swal.fire({
+            title: 'Ingrese El Privilegio',
+            input: 'text',
+            inputAttributes: {
+                placeholder: 'Ingresar'
+            },
+            inputLabel: 'Nombre Del Privilegio',
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Por Favor, Ingresa Un Nombre Valido.';
+                } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ/ ]+$/.test(value.trim())) {
+                    return 'Solo Solo Se Permiten Letras y Espacios En El Nombre.';
+                }
+                return '';
+            },
+            reverseButtons: true
+        });
+
+        if (!name) {
+            window.location.href = '@Url.Action("Index", "Privilege")';
+            return;
+        }
+
+        document.getElementById('Name').value = name;
+        Swal.fire({
+            title: '¿Guardar Nuevo Privilegio?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Si, Guardar Privilegio'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('Form').submit();
+            } else {
+                window.location.href = '@Url.Action("Index", "Privilege")';
+            }
+        });
+    }
+</script>
+
+
+<form asp-action="Create" id="Form">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" id="Name" name="Name" />
+</form>
