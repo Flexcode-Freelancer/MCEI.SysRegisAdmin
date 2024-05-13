@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using MCEI.SysRegisAdmin.EN.ProfessionOrStudy___EN;
+using MCEI.SysRegisAdmin.EN.Server___EN;
+using MCEI.SysRegisAdmin.EN.HistoryServer___EN;
 
 
 #endregion
@@ -173,6 +175,10 @@ namespace MCEI.SysRegisAdmin.EN.Membership___EN
         #endregion
 
         public ProfessionOrStudy? ProfessionOrStudy { get; set; } //propiedad de navegación
+
+        public List<Server> Servers { get; set; } = new List<Server>(); // Propiedad de navegacion
+
+        public List<HistoryServer> HistoryServers { get; set; } = new List<HistoryServer>(); // Propiedad de navegacion
     }
 
     public enum Membership_Status
