@@ -1,0 +1,30 @@
+﻿@model MCEI.SysRegisAdmin.EN.Privilege___EN.Privilege
+
+@{
+    ViewData["Title"] = "Detalles Del Privilegio";
+}
+
+<h1>Detalles Del Privilegio</h1>
+<hr />
+
+<script>
+    async function ShowDetailsPrompt() {
+        const result = await Swal.fire({
+            title: `Detalles Del Privilegio`,
+            text: `Nombre: ${'@Model.Name'}`,
+            showCloseButton: true,
+            showCancelButton: true,
+            cancelButtonText: 'Regresar',
+            confirmButtonText: 'Modificar',
+            reverseButtons: true
+        });
+
+        // Si el usuario elige modificar, redirige a la acción Edit
+        if (result.isConfirmed) {
+            window.location.href = '@Url.Action("Edit", "Privilege", new { id = Model.Id })';
+        } else {
+            window.location.href = '@Url.Action("Index", "Privilege")';
+        }
+    }
+    window.onload = ShowDetailsPrompt; // Asigna la función ShowDetailsPrompt al evento de carga de la página
+</script>
