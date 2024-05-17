@@ -1,42 +1,39 @@
 ﻿@model MCEI.SysRegisAdmin.EN.User___EN.User
 
 @{
-    ViewData["Title"] = "Inicio de sesión";
+    ViewData["Title"] = "Inicio De Sesión";
 }
 
-<h1>Inicio de Sesión</h1>
-<hr />
-<form asp-action="Login">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" required/>
-        <span asp-validation-for="Email"></span>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <div class="brand-logo">
+                            <img src="/assets/img/logos/Logo-Elim-Black.png" alt="logo" width="50">
+                        </div>
+                        <h4>Inicio De Sesión</h4>
+                        <h6 class="font-weight-light">Sistema De Registro Administrativo</h6>
+                        <form class="pt-3" asp-action="Login">
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input class="form-control form-control-lg" asp-for="Email" placeholder="Correo Electronico" required>
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input class="form-control form-control-lg" asp-for="Password" placeholder="Contraseña" required>
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                            <div class="mt-3">
+                                <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="Inicio De Sesión"></input>
+                            </div> <br />
+                            <span class="text-danger">@ViewBag.Error</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" required/>
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <input type="submit" value="Iniciar sesión"/>
-    </div>
-    <span class="text-danger">@ViewBag.Error</span>
-</form>
-
-@section Scripts{
-    <script>
-        function showErrorAlert(message) {
-            Swal.fire({
-                title: 'Ups!',
-                text: message,
-                icon: 'error'
-            });
-        }
-        // Mostrar alerta de ViewBag.Error si es necesario
-        @if (!string.IsNullOrEmpty(ViewBag.Error))
-        {
-            @:showErrorAlert('@ViewBag.Error');
-        }
-    </script>
-}
+</div>
