@@ -23,7 +23,7 @@
 
     <script src="~/plugins/ChartJs/js/Chart.min.js"></script>
 </head>
-<body>
+<body style="background-color:#f5f7ff">
     @if(User.Identity.IsAuthenticated)
     {
         <div class="container-scroller">
@@ -132,7 +132,7 @@
                     </ul>
                 </nav>
                 <div>
-                    <main role="main">
+                    <main role="main" style="background-color:#f5f7ff">
                         @RenderBody()
                     </main>
                 </div>
