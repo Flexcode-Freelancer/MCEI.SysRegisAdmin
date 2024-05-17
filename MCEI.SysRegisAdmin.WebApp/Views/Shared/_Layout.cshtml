@@ -10,67 +10,133 @@
     <link href="~/plugins/DataTables/css/min.css" rel="stylesheet" />
     <link href="~/plugins/DataTables/css/dataTable.css" rel="stylesheet" />
     <link href="~/plugins/Select2/css/min.css" rel="stylesheet" />
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets/vendors/css/vendor.bundle.base.css">
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="~/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/js/select.dataTables.min.css">
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/assets/css/vertical-layout-light/style.css">
+
     <script src="~/plugins/ChartJs/js/Chart.min.js"></script>
 </head>
 <body>
     @if(User.Identity.IsAuthenticated)
     {
-        <nav>
-            @if (User.Identity!.IsAuthenticated && User.IsInRole("Desarrollador"))
-            {
-                <ul>
-                    <li>
-                        <span>Principal</span>
-                        <ul>
-                            <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span>Administracion</span>
-                        <ul>
-                            <li>
-                                <a asp-area="" asp-controller="Membership" asp-action="Index">Membresia</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span>Mantenimiento</span>
-                        <ul>
-                            <li>
-                                <a asp-area="" asp-controller="ProfessionOrStudy" asp-action="Index">Profesion u Oficio</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Privilege" asp-action="Index">Privilegios</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span>Seguridad</span>
-                        <ul>
-                            <li>
-                                <a asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="User" asp-action="ChangePassword">Cambiar Contraseña</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <a asp-area="" asp-controller="User" asp-action="Logout">Cerrar Sesión</a>
-            }
-        </nav>
-        <div>
-            <main role="main">
-                @RenderBody()
-            </main>
+        <div class="container-scroller">
+            <!-- partial:partials/_navbar.html -->
+            <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo mr-2" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logos/Logo-Elim-Black.png" class="mr-2" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" asp-area="" asp-controller="Home" asp-action="Index"><img src="/assets/img/logos/Logo-Sin-Letras-Black.png" alt="logo" width="50" /></a>
+                </div>
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="icon-menu"></span>
+                    </button>
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item nav-profile dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                                <img src="/assets/img/user/profile-user.png" alt="profile" />
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Logout">
+                                    <i class="ti-power-off text-primary"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:partials/_settings-panel.html -->
+                <div class="theme-setting-wrapper">
+                    <div id="settings-trigger"><i class="ti-settings"></i></div>
+                    <div id="theme-settings" class="settings-panel">
+                        <i class="settings-close ti-close"></i>
+                        <p class="settings-heading">Tema Lateral</p>
+                        <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Blanco</div>
+                        <p class="settings-heading mt-2">Tema Encavezado</p>
+                        <div class="color-tiles mx-0 px-4">
+                            <div class="tiles info"></div>
+                            <div class="tiles dark"></div>
+                            <div class="tiles default"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- partial -->
+                <!-- partial:partials/_sidebar.html -->
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <ul class="nav">
+                        <spam class="menu-title">Principal</spam>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <br />
+                        <spam class="menu-title">Administracion</spam>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Membership" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Membresia</span>
+                            </a>
+                        </li>
+                        <br />
+                        <spam class="menu-title">Mantenimiento</spam>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="ProfessionOrStudy" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Profesion u Oficio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Privilege" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Privilegio</span>
+                            </a>
+                        </li>
+                        <br />
+                        <spam class="menu-title">Seguridad</spam>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Role" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Roles</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Usuarios</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="User" asp-action="ChangePassword">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Cambiar Contraseña</span>
+                            </a>
+                        </li>
+                        <br />
+                    </ul>
+                </nav>
+                <div>
+                    <main role="main">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
         </div>
     }
     else
@@ -87,6 +153,23 @@
     <script src="~/plugins/DataTables/js/dataTable.js"></script>
     <script src="~/plugins/Select2/js/min.js"></script>
     <script src="~/plugins/BarCode/js/min.js"></script>
+    <!-- plugins:js -->
+    <script src="~/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- Plugin js for this page -->
+    <script src="~/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/assets/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="~/assets/js/dataTables.select.min.js"></script>
+    <!-- inject:js -->
+    <script src="~/assets/js/off-canvas.js"></script>
+    <script src="~/assets/js/hoverable-collapse.js"></script>
+    <script src="~/assets/js/template.js"></script>
+    <script src="~/assets/js/settings.js"></script>
+    <script src="~/assets/js/todolist.js"></script>
+    <!-- Custom js for this page-->
+    <script src="~/assets/js/dashboard.js"></script>
+    <script src="~/assets/js/Chart.roundedBarCharts.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
