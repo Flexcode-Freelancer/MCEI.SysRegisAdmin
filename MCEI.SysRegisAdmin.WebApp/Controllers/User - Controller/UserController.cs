@@ -182,7 +182,7 @@ namespace MCEI.SysRegisAdmin.WebApp.Controllers.User___Controller
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                 }
                 else
-                    throw new Exception("Credenciles Incorrectas, Vuelve a Intentarlo");
+                    throw new Exception("Credenciales Incorrectas, Vuelve a Intentarlo");
 
                 if (!string.IsNullOrWhiteSpace(returnUrl))
                     return Redirect(returnUrl);
