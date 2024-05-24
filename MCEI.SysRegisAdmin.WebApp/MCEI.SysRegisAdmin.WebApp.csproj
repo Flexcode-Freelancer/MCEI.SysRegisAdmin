@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
     <Folder Include="wwwroot\plugins\BarCode\js\" />
     <Folder Include="wwwroot\plugins\ChartJs\js\" />
     <Folder Include="wwwroot\plugins\DataTables\js\" />
