@@ -2,9 +2,26 @@
     ViewData["Title"] = "Inicio";
 }
 
-<img src="/assets/img/logos/Logo-Elim-Black.png" alt="Alternate Text" width="200"/>
-<h3 class="font-weight-bold">¡Bienvenido De Vuelta!</h3>
-<h6 class="font-weight-normal mb-0">Sistema De Registro Administrativo - Mision Cristiana Elim Izalco</h6>
+
+<style>
+    .bienvenida {
+        height: 78vh;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        align-content:center;
+        text-align:center;
+    }
+
+</style>
+
+<div class ="bienvenida">
+    <div>
+        <img class="elimLogo" src="/assets/img/logos/Logo-Elim-Black.png" alt="Alternate Text" width="200" />
+        <h3 class="font-weight-bold">¡Bienvenido De Vuelta!</h3>
+        <h6 class="font-weight-normal mb-0">Sistema De Registro Administrativo - Mision Cristiana Elim Izalco</h6>
+    </div>
+</div>
 
 @section Scripts {
     @{
