@@ -27,13 +27,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="Dui">Dui</label>
-                    <input type="text" class="form-control" name="Dui" id="inputDui" placeholder="Ingresar" />
+                    <input type="text" class="form-control" name="Dui" id="inputDui" placeholder="00000000-0" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProfessionOrStudy">Profesion u Oficio</label>
-                    <select id="IdProfessionOrStudy" name="IdProfessionOrStudy" class="select2 form-control">
+                    <select id="IdProfessionOrStudy" name="IdProfessionOrStudy" class="select2 form-select">
+                        <option value="0" selected >Seleccionar</option>
                         @foreach (var item in professionOrStudies!)
                         {
                             <option value="@item.Id">@item.Name</option>
@@ -46,25 +47,29 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="Status">Estatus</label>
-                    <select class="form-control" name="Status">
+                    <select class="form-select" name="Status">
+                        <option value="0" selected>Seleccionar</option>
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
                     </select>
                 </div>
             </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Buscar Miembro" /> &nbsp;&nbsp;
-                    <a asp-action="Create" class="btn btn-secondary">Nueva Membresia</a>
+                    <input type="submit" class="btn btn-outline-success m-1" value="Buscar Miembro" /> &nbsp;&nbsp;
+                    <a asp-action="Create" class="btn btn-primary">Nueva Membresia</a>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
+<br />
+<br />
 <h2>Tabla de Resultados</h2>
+<br />
 <table id="ResultData" class="hover" style="width:100%">
     <thead>
         <tr>
@@ -121,9 +126,9 @@
                     <td></td>
                 }
                 <td>
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "" })
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning m-1" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info m-1" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-1" })
                 </td>
             </tr>
         }
