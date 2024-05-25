@@ -35,7 +35,7 @@ namespace MCEI.SysRegisAdmin.DAL
         // Metodo de Conexion a la Base de Datos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@""); // String de Conexion
+            optionsBuilder.UseSqlServer(@"Server=;Database=;Trusted_Connection=True;TrustServerCertificate=True"); // String de Conexion
         }
     }
 }
